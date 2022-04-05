@@ -1,4 +1,19 @@
 package com.atmira.javatest.dto;
 
-public class AsteroidDTO {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class AsteroidDTO implements Serializable {
+    private String name;
+    private Float diameter;
+    private Float velocity;
+    private Date close_approach_date;
+    private String orbiting_body;
 }
