@@ -8,6 +8,7 @@ import com.atmira.javatest.service.AsteroidServiceI;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import java.util.List;
 public class AsteroidsController {
 
     @Autowired
+    @Setter
     private AsteroidServiceI asteroidService;
 
     @ApiOperation(value = "getAsteroids"
