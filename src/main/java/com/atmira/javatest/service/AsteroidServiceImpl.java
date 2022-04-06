@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,32 +42,46 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
     @Override
     public List<AsteroidDTO> findAllAsteroids(String planet, LocalDate dateStart, LocalDate dateEnd) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        //objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        //objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        Resource resource = resourceLoader.getResource("classpath:nasa_response_json.json");
+//
+//        File file = null;
+//        NearEarthObjects apiDataFiltered = null;
+//
+//        try {
+//            file = resource.getFile();
+//            apiDataFiltered  = objectMapper.readValue(file, NearEarthObjects.class);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        apiDataFiltered.getNear_earth_objects().values().stream().forEach(System.out::println);
+//
+//        //Tratamiento de los datos extraídos del json
+//        List<Asteroid> filteredAsteroidsTest = new ArrayList<>();
+//        apiDataFiltered.getNear_earth_objects().values().stream().forEach(c -> filteredAsteroidsTest.addAll(c));
+//
+//        List<AsteroidDTO> filteredAsteroidsDTOTest = filteredAsteroidsTest
+//                .stream()
+//                .filter(a -> a.is_potentially_hazardous_asteroid())
+//                .filter(a -> a.getClose_approach_data()[0].getOrbiting_body().equalsIgnoreCase(planet))
+//                .map(a -> new AsteroidDTO(
+//                        a.getName(),
+//                        (a.getEstimated_diameter().getKilometers().get("estimated_diameter_min") + a.getEstimated_diameter().getKilometers().get("estimated_diameter_max"))/2,
+//                        a.getClose_approach_data()[0].getRelative_velocity().get("kilometers_per_hour"),
+//                        new SimpleDateFormat("yyyy-MM-dd").format(a.getClose_approach_data()[0].getClose_approach_date()),
+//                        a.getClose_approach_data()[0].getOrbiting_body()
+//                ))
+//                .collect(Collectors.toList());
+//
+//        //Ordenamos
+//        filteredAsteroidsDTOTest.sort(Comparator.comparing(AsteroidDTO::getDiameter).reversed());
+//
+//        //Enviamos los 3 más grandes de diametro
+//        return filteredAsteroidsDTOTest.stream().limit(3).collect(Collectors.toList());
 
-        //File file = new File("classpath:resources/nasa_response_json.json");
-
-        Resource resource = resourceLoader.getResource("classpath:nasa_response_json.json");
-//        Resource resource = resourceLoader.getResource("classpath:nasa_response_json2.json");
-
-        File file = null;
-        List<Asteroid> myAsteroids = null;
-        Map<String, List<Asteroid>> asteroidsByDate = null;
-        NearEarthObjects apiDataFiltered = null;
-
-        try {
-            file = resource.getFile();
-//            myAsteroids = objectMapper.readValue(file, new TypeReference<List<Asteroid>>() {});
-//            asteroidsByDate = objectMapper.readValue(file, new TypeReference<Map<String, List<Asteroid>>>() {});
-            apiDataFiltered  = objectMapper.readValue(file, NearEarthObjects.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        apiDataFiltered.getNear_earth_objects().values().stream().forEach(System.out::println);
-
-        System.out.println("********************************************************************");
+//        System.out.println("********************************************************************");
 
         //Llamada a la API
         apiCall(dateStart, dateEnd).getNear_earth_objects().values().stream().forEach(System.out::println);
@@ -82,7 +97,7 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
                         a.getName(),
                         (a.getEstimated_diameter().getKilometers().get("estimated_diameter_min") + a.getEstimated_diameter().getKilometers().get("estimated_diameter_max"))/2,
                         a.getClose_approach_data()[0].getRelative_velocity().get("kilometers_per_hour"),
-                        a.getClose_approach_data()[0].getClose_approach_date(),
+                        new SimpleDateFormat("yyyy-MM-dd").format(a.getClose_approach_data()[0].getClose_approach_date()),
                         a.getClose_approach_data()[0].getOrbiting_body()
                 ))
                 .collect(Collectors.toList());
@@ -95,9 +110,9 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
     }
 
     protected NearEarthObjects apiCall(LocalDate dateStart, LocalDate dateEnd){
-//        //URL de la petición
+        //URL de la petición
         String API_REQUEST = API_REQUEST_ENDPOINT + "?" + API_PARAMETER_START_DATE + "=" + dateStart
-                + "&" + API_PARAMETER_END_DATE + "=" + dateEnd + "&api_key=" + API_KEY;
+                + "&" + API_PARAMETER_END_DATE + "=" + dateEnd + "&" + API_PARAMETER_KEY + "=" + API_KEY;
 
 //        Map<String, String> params = new HashMap<>();
 //        params.put(API_PARAMETER_KEY, API_KEY);

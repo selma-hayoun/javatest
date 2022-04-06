@@ -1,0 +1,23 @@
+[
+   {
+      "name":"(2009 FU4)",
+      "diameter":1.1845206,
+      "velocity":84543.66,
+      "close_approach_date":"2020-09-09",
+      "orbiting_body":"Earth"
+   },
+   {
+      "name":"(2003 BK47)",
+      "diameter":1.1845206,
+      "velocity":56925.36,
+      "close_approach_date":"2020-09-14",
+      "orbiting_body":"Earth"
+   },
+   {
+      "name":"65909 (1998 FH12)",
+      "diameter":0.61311597,
+      "velocity":64169.61,
+      "close_approach_date":"2020-09-14",
+      "orbiting_body":"Earth"
+   }
+]

@@ -2,6 +2,7 @@ package com.atmira.javatest.service;
 
 import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.model.Asteroid;
+import com.atmira.javatest.model.NearEarthObjects;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -14,6 +14,6 @@ public class AsteroidDTO implements Serializable {
     private String name;
     private Float diameter;
     private Float velocity;
-    private Date close_approach_date;
+    private String close_approach_date;
     private String orbiting_body;
 }
