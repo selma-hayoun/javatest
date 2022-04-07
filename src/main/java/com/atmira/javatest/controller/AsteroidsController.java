@@ -42,6 +42,7 @@ public class AsteroidsController {
             throw new NotSupportedPlanetException(planet);
         }
 
+        //Parámetros fijos: desde fecha de la petición a 7 días
         LocalDate dateStart = LocalDate.now();
         LocalDate dateEnd = dateStart.plusDays(7);
 

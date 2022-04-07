@@ -36,6 +36,6 @@ public class SwaggerConfig {
                         "Selma Hayoun Caballero",
                         "https://es.linkedin.com/in/selma-problem-solving-lover",
                         "selma.hayoun.caballero@gmail.com"),
-                "License of API", "#", Collections.emptyList());
+                "Licencia", "#", Collections.emptyList());
     }
 }

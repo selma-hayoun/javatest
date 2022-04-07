@@ -1,10 +1,5 @@
 package com.atmira.javatest.controller;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.any;
-
 import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.exception.NotAsteroidsFoundException;
 import com.atmira.javatest.exception.NotSupportedPlanetException;
@@ -21,6 +16,11 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 public class AsteroidsControllerTest {
 

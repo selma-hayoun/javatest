@@ -37,8 +37,14 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
     public List<AsteroidDTO> findAllAsteroids(String planet, LocalDate dateStart, LocalDate dateEnd) {
 
         List<Asteroid> filteredAsteroids = new ArrayList<>();
+
+        //Del objeto NearEarthObjects extraemos los valores del mapa de objetos - Listas de asteroides
+        //Y los vamos añadiendo a nuestra lista
         apiCall(dateStart, dateEnd).getNear_earth_objects().values().stream().forEach(c -> filteredAsteroids.addAll(c));
 
+        //Evaluamos: potencial riesgo de impacto, planeta que orbitan es el suministrado
+        //Mapeamos a AsteroidDTO (calculo de diámetro medio y formateo de fecha)
+        //Pasamos a lista
         List<AsteroidDTO> filteredAsteroidsDTO = filteredAsteroids
                 .stream()
                 .filter(a -> a.is_potentially_hazardous_asteroid())
@@ -52,7 +58,7 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
                 ))
                 .collect(Collectors.toList());
 
-        //Ordenamos
+        //Ordenamos según diámetro
         filteredAsteroidsDTO.sort(Comparator.comparing(AsteroidDTO::getDiameter).reversed());
 
         //Enviamos los 3 más grandes de diametro
