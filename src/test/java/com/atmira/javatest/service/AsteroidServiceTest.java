@@ -8,6 +8,7 @@ import static org.mockito.Mockito.*;
 import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.model.Asteroid;
 import com.atmira.javatest.model.NearEarthObjects;
+import com.atmira.javatest.util.NasaDummyDataUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,9 +29,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 public class AsteroidServiceTest {
 
@@ -38,22 +38,22 @@ public class AsteroidServiceTest {
     private String planet;
     private ObjectMapper objectMapper;
     private RestTemplate restTemplate;
-
     private AsteroidServiceImpl asteroidService;
-
     private ResponseEntity<NearEarthObjects> nearEarthObjectsResponseEntity;
+    private NasaDummyDataUtil nasaDummyDataUtil;
+
 
     @BeforeEach
     public void setup() {
         asteroidService = new AsteroidServiceImpl();
-
         objectMapper = new ObjectMapper();
+        nasaDummyDataUtil = new NasaDummyDataUtil();
         restTemplate = Mockito.mock(RestTemplate.class);
 
         asteroidService.setRestTemplate(restTemplate);
 
         //Preparamos objeto del tipo vacío con OK
-        nearEarthObjectsResponseEntity=new ResponseEntity<NearEarthObjects>(HttpStatus.OK);
+        nearEarthObjectsResponseEntity = new ResponseEntity<NearEarthObjects>(HttpStatus.OK);
 
         LOG.info("@BeforeAll - executes once before all test methods in AsteroidServiceITest");
     }
@@ -69,7 +69,9 @@ public class AsteroidServiceTest {
         String API_REQUEST = asteroidService.API_REQUEST_ENDPOINT + "?" + asteroidService.API_PARAMETER_START_DATE + "=" + dateStart
                 + "&" + asteroidService.API_PARAMETER_END_DATE + "=" + dateEnd + "&" + asteroidService.API_PARAMETER_KEY + "=" + asteroidService.API_KEY;
 
-        getNasaResponseDummyData();
+//        getNasaResponseDummyData();
+
+        nearEarthObjectsResponseEntity = ResponseEntity.ok( (NearEarthObjects) nasaDummyDataUtil.getNasaResponseDummyData("nasa_response_json.json", Optional.of(new NearEarthObjects())).get());
 
         when(restTemplate.getForEntity(API_REQUEST, NearEarthObjects.class)).thenReturn(nearEarthObjectsResponseEntity);
 
@@ -77,50 +79,50 @@ public class AsteroidServiceTest {
     }
 
 
-    private void getNasaResponseDummyData() {
-        //Accedemos a una llamada registrada
-//        resource = resourceLoader.getResource("src/test/data/nasa_response_json.json");
-
-        String resourceName = "nasa_response_json.json";
-
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        File file = null;
-        NearEarthObjects apiDataFiltered = null;
-
-        //Parseamos el objeto del json
-        try {
-//            file = resource.getFile();
-            file = new File(classLoader.getResource(resourceName).getFile());
-            apiDataFiltered  = objectMapper.readValue(file, NearEarthObjects.class);
-        } catch (IOException e) {
-            LOG.info("whenCallingApiCall_thenShouldReturnCorrectObject() ERROR - " + e.getMessage());
-        }
-
-        //Seteamos el valor esperado de petición a la api de la nasa con el contenido de nuestro json para pruebas
-        nearEarthObjectsResponseEntity = ResponseEntity.ok(apiDataFiltered);
-    }
-
-
-    //DEPURAR: Los dos métodos en uno
-    private List<AsteroidDTO> getNasaResponseDummyData(String resourceName) {
-
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        File file = null;
-        List<AsteroidDTO> apiDataFiltered = null;
-
-        //Parseamos el objeto del json
-        try {
-//            file = resource.getFile();
-            file = new File(classLoader.getResource(resourceName).getFile());
-            apiDataFiltered  = objectMapper.readValue(file, new TypeReference<List<AsteroidDTO>>(){});
-        } catch (IOException e) {
-            LOG.info("whenCallingApiCall_thenShouldReturnCorrectObject() ERROR - " + e.getMessage());
-        }
-
-        return apiDataFiltered;
-    }
+//    private void getNasaResponseDummyData() {
+//        //Accedemos a una llamada registrada
+////        resource = resourceLoader.getResource("src/test/data/nasa_response_json.json");
+//
+//        String resourceName = "nasa_response_json.json";
+//
+//        ClassLoader classLoader = getClass().getClassLoader();
+//
+//        File file = null;
+//        NearEarthObjects apiDataFiltered = null;
+//
+//        //Parseamos el objeto del json
+//        try {
+////            file = resource.getFile();
+//            file = new File(classLoader.getResource(resourceName).getFile());
+//            apiDataFiltered  = objectMapper.readValue(file, NearEarthObjects.class);
+//        } catch (IOException e) {
+//            LOG.info("whenCallingApiCall_thenShouldReturnCorrectObject() ERROR - " + e.getMessage());
+//        }
+//
+//        //Seteamos el valor esperado de petición a la api de la nasa con el contenido de nuestro json para pruebas
+//        nearEarthObjectsResponseEntity = ResponseEntity.ok(apiDataFiltered);
+//    }
+//
+//
+//    //DEPURAR: Los dos métodos en uno
+//    private List<AsteroidDTO> getNasaResponseDummyData(String resourceName) {
+//
+//        ClassLoader classLoader = getClass().getClassLoader();
+//
+//        File file = null;
+//        List<AsteroidDTO> apiDataFiltered = null;
+//
+//        //Parseamos el objeto del json
+//        try {
+////            file = resource.getFile();
+//            file = new File(classLoader.getResource(resourceName).getFile());
+//            apiDataFiltered  = objectMapper.readValue(file, new TypeReference<List<AsteroidDTO>>(){});
+//        } catch (IOException e) {
+//            LOG.info("whenCallingApiCall_thenShouldReturnCorrectObject() ERROR - " + e.getMessage());
+//        }
+//
+//        return apiDataFiltered;
+//    }
 
 
     //findAllAsteroids method from AsteroidServiceImpl
@@ -136,12 +138,19 @@ public class AsteroidServiceTest {
         String API_REQUEST = asteroidService.API_REQUEST_ENDPOINT + "?" + asteroidService.API_PARAMETER_START_DATE + "=" + dateStart
                 + "&" + asteroidService.API_PARAMETER_END_DATE + "=" + dateEnd + "&" + asteroidService.API_PARAMETER_KEY + "=" + asteroidService.API_KEY;
 
-        getNasaResponseDummyData();
+//        getNasaResponseDummyData();
+
+        nearEarthObjectsResponseEntity = ResponseEntity.ok( (NearEarthObjects) nasaDummyDataUtil.getNasaResponseDummyData("nasa_response_json.json", Optional.of(new NearEarthObjects())).get());
 
         //Para que el método apiCall tenga datos
         when(restTemplate.getForEntity(API_REQUEST, NearEarthObjects.class)).thenReturn(nearEarthObjectsResponseEntity);
 
-        assertThat(asteroidService.findAllAsteroids(planet, dateStart, dateEnd)).isEqualTo(getNasaResponseDummyData("asteroids_test_result.json"));
+        //"asteroids_test_result.json"
+
+        List<AsteroidDTO> asteroidDTOListExpected = new ArrayList<>();
+        asteroidDTOListExpected = (List<AsteroidDTO>) nasaDummyDataUtil.getNasaResponseDummyData("asteroids_test_result.json", Optional.of(asteroidDTOListExpected)).get();
+
+        assertThat(asteroidService.findAllAsteroids(planet, dateStart, dateEnd)).isEqualTo(asteroidDTOListExpected);
     }
 
 }

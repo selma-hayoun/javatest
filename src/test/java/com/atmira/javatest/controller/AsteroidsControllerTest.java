@@ -8,6 +8,7 @@ import static org.mockito.ArgumentMatchers.any;
 import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.model.NearEarthObjects;
 import com.atmira.javatest.service.AsteroidServiceI;
+import com.atmira.javatest.util.NasaDummyDataUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,23 +25,23 @@ import org.springframework.http.ResponseEntity;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AsteroidsControllerTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(AsteroidsControllerTest.class);
-    private Resource resource;
     private String planet;
-    private static ObjectMapper objectMapper;
-    private ResourceLoader resourceLoader;
-
     private AsteroidServiceI asteroidService;
     private AsteroidsController asteroidsController;
     private List<AsteroidDTO> filteredAsteroidsDTO;
+    private NasaDummyDataUtil nasaDummyDataUtil;
 
     @BeforeEach
     public void setup() {
-        objectMapper = new ObjectMapper();
+        nasaDummyDataUtil = new NasaDummyDataUtil();
+        filteredAsteroidsDTO = new ArrayList<>();
 
         //Mockeamos el servicio
         asteroidService = Mockito.mock(AsteroidServiceI.class);
@@ -49,7 +50,9 @@ public class AsteroidsControllerTest {
         asteroidsController = new AsteroidsController();
         asteroidsController.setAsteroidService(asteroidService);
 
-        filteredAsteroidsDTO = getNasaResponseDummyData("asteroids_test_result.json");
+        //Datos del servicio mockeado
+//        filteredAsteroidsDTO = getNasaResponseDummyData("asteroids_test_result.json");
+        filteredAsteroidsDTO = (List<AsteroidDTO>) nasaDummyDataUtil.getNasaResponseDummyData("asteroids_test_result.json", Optional.of(filteredAsteroidsDTO)).get();
 
         //Ahora mockeamos para cuando haga la llamada con el servicio, devuelva lo que queramos
         when(asteroidService.findAllAsteroids(anyString(), any(), any())).thenReturn(filteredAsteroidsDTO);
@@ -68,24 +71,24 @@ public class AsteroidsControllerTest {
     }
 
 
-    //DEPURAR: Los dos métodos en uno
-    private List<AsteroidDTO> getNasaResponseDummyData(String resourceName) {
-
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        File file = null;
-        List<AsteroidDTO> apiDataFiltered = null;
-
-        //Parseamos el objeto del json
-        try {
-//            file = resource.getFile();
-            file = new File(classLoader.getResource(resourceName).getFile());
-            apiDataFiltered  = objectMapper.readValue(file, new TypeReference<List<AsteroidDTO>>(){});
-        } catch (IOException e) {
-            LOG.info("whenCallingApiCall_thenShouldReturnCorrectObject() ERROR - " + e.getMessage());
-        }
-
-        return apiDataFiltered;
-    }
+//    //DEPURAR: Los dos métodos en uno
+//    private List<AsteroidDTO> getNasaResponseDummyData(String resourceName) {
+//
+//        ClassLoader classLoader = getClass().getClassLoader();
+//
+//        File file = null;
+//        List<AsteroidDTO> apiDataFiltered = null;
+//
+//        //Parseamos el objeto del json
+//        try {
+////            file = resource.getFile();
+//            file = new File(classLoader.getResource(resourceName).getFile());
+//            apiDataFiltered  = objectMapper.readValue(file, new TypeReference<List<AsteroidDTO>>(){});
+//        } catch (IOException e) {
+//            LOG.info("whenCallingApiCall_thenShouldReturnCorrectObject() ERROR - " + e.getMessage());
+//        }
+//
+//        return apiDataFiltered;
+//    }
 
 }
