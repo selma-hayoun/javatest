@@ -52,8 +52,8 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
      * @param ex
      * @return
      */
-    @ExceptionHandler(NotSupportedPlanet.class)
-    public ResponseEntity<ApiError> handleNotSupportedPlanet(NotSupportedPlanet ex) {
+    @ExceptionHandler(NotSupportedPlanetException.class)
+    public ResponseEntity<ApiError> handleNotSupportedPlanet(NotSupportedPlanetException ex) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }
@@ -66,8 +66,8 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
      * @param ex
      * @return
      */
-    @ExceptionHandler(NotAsteroidsFound.class)
-    public ResponseEntity<ApiError> handleNotAsteroidsFound(NotAsteroidsFound ex) {
+    @ExceptionHandler(NotAsteroidsFoundException.class)
+    public ResponseEntity<ApiError> handleNotAsteroidsFound(NotAsteroidsFoundException ex) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }
