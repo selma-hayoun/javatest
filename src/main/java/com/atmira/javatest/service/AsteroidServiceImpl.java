@@ -3,31 +3,22 @@ package com.atmira.javatest.service;
 import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.model.Asteroid;
 import com.atmira.javatest.model.NearEarthObjects;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class AsteroidServiceImpl implements AsteroidServiceI {
-
-//    @Autowired
-//    private ResourceLoader resourceLoader;
 
     @Autowired
     @Setter
@@ -44,8 +35,6 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
 
     @Override
     public List<AsteroidDTO> findAllAsteroids(String planet, LocalDate dateStart, LocalDate dateEnd) {
-        //Llamada a la API
-//        apiCall(dateStart, dateEnd).getNear_earth_objects().values().stream().forEach(System.out::println);
 
         List<Asteroid> filteredAsteroids = new ArrayList<>();
         apiCall(dateStart, dateEnd).getNear_earth_objects().values().stream().forEach(c -> filteredAsteroids.addAll(c));
