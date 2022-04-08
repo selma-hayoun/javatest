@@ -17,9 +17,9 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class AsteroidServiceIntegrationTest {
+public class AsteroidServiceIntTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AsteroidServiceIntegrationTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AsteroidServiceIntTest.class);
     private String planet;
     private NasaDummyDataUtil nasaDummyDataUtil;
 
@@ -32,6 +32,11 @@ public class AsteroidServiceIntegrationTest {
         LOG.info("@BeforeEach - executes once before each test method in AsteroidServiceIntegrationTest");
     }
 
+    /**
+     * Test del servicio AsteroidServiceI: datos correctos
+     *
+     * @throws Exception
+     */
     @Test
     public void whenCallingFindAllAsteroids_integrated_thenShouldReturnCorrectList() throws Exception {
         //Asignamos el planeta de la petición

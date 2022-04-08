@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
+/**
+ * Clase creada para formatear los errores de nuestra Api controlados por nosotros
+ */
 @Getter
 @Setter
 @RequiredArgsConstructor

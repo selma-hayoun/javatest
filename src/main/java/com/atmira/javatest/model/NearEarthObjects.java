@@ -19,6 +19,12 @@ import java.util.Map;
 public class NearEarthObjects implements Serializable {
     private Map<String, List<Asteroid>> near_earth_objects;
 
+    /**
+     * JsonAnyGetter
+     * Me permite en la serialización del json devolver un mapa con todos los datos que contenga la etiqueta near_earth_objects
+     *
+     * @return
+     */
     @JsonAnyGetter
     public Map<String, List<Asteroid>> getNear_earth_objects() {
         return near_earth_objects;

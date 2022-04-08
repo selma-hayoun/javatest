@@ -44,7 +44,11 @@ public class AsteroidServiceTest {
         LOG.info("@BeforeEach - executes once before each test method in AsteroidServiceTest");
     }
 
-    //apiCall method from AsteroidServiceImpl
+    /**
+     * Test método apiCall() de AsteroidServiceImpl
+     *
+     * @throws Exception
+     */
     @Test
     public void whenCallingApiCall_thenShouldReturnCorrectObject() throws Exception {
 
@@ -57,12 +61,19 @@ public class AsteroidServiceTest {
 
         nearEarthObjectsResponseEntity = ResponseEntity.ok( (NearEarthObjects) nasaDummyDataUtil.getNasaResponseDummyData("nasa_response_json.json", Optional.of(new NearEarthObjects())).get());
 
+        //Para que el método apiCall tenga datos - simulamos la llamada con los datos del json
         when(restTemplate.getForEntity(API_REQUEST, NearEarthObjects.class)).thenReturn(nearEarthObjectsResponseEntity);
 
         assertThat(asteroidService.apiCall(dateStart, dateEnd)).isEqualTo(nearEarthObjectsResponseEntity.getBody());
     }
 
-    //findAllAsteroids method from AsteroidServiceImpl
+    /**
+     * Test método findAllAsteroids() de AsteroidServiceImpl
+     *
+     * Caso fechas y planeta para datos correctos
+     *
+     * @throws Exception
+     */
     @Test
     public void whenCallingFindAllAsteroids_thenShouldReturnCorrectList() throws Exception {
         //Asignamos el planeta de la petición
@@ -77,7 +88,7 @@ public class AsteroidServiceTest {
 
         nearEarthObjectsResponseEntity = ResponseEntity.ok( (NearEarthObjects) nasaDummyDataUtil.getNasaResponseDummyData("nasa_response_json.json", Optional.of(new NearEarthObjects())).get());
 
-        //Para que el método apiCall tenga datos
+        //Para que el método apiCall tenga datos - simulamos la llamada con los datos del json
         when(restTemplate.getForEntity(API_REQUEST, NearEarthObjects.class)).thenReturn(nearEarthObjectsResponseEntity);
 
         List<AsteroidDTO> asteroidDTOListExpected = new ArrayList<>();

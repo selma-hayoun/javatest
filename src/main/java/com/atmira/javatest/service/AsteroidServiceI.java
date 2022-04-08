@@ -6,5 +6,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface AsteroidServiceI {
-    public List<AsteroidDTO> findAllAsteroids(String planet, LocalDate dateStart, LocalDate dateEnd);
+    List<AsteroidDTO> findAllAsteroids(String planet, LocalDate dateStart, LocalDate dateEnd);
 }

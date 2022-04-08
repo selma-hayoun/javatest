@@ -19,6 +19,12 @@ public class AsteroidEstimatedDiameter implements Serializable {
     //Dos claves: estimated_diameter_min, estimated_diameter_max
     private Map<String, Float> kilometers;
 
+    /**
+     * JsonAnyGetter
+     * Me permite en la serialización del json devolver un mapa con todos los datos que contenga la etiqueta kilometers
+     *
+     * @return
+     */
     @JsonAnyGetter
     public Map<String, Float> getKilometers() {
         return kilometers;

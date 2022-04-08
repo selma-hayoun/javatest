@@ -21,6 +21,12 @@ public class AsteroidCloseApproachData implements Serializable {
     private Map<String, Float> relative_velocity;
     private String orbiting_body;
 
+    /**
+     * JsonAnyGetter
+     * Me permite en la serialización del json devolver un mapa con todos los datos que contenga la etiqueta relative_velocity
+     *
+     * @return
+     */
     @JsonAnyGetter
     public Map<String, Float> getRelative_velocity() {
         return relative_velocity;

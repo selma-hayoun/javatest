@@ -24,7 +24,6 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
     @Setter
     private RestTemplate restTemplate;
 
-
     protected static final String API_REQUEST_ENDPOINT = "https://api.nasa.gov/neo/rest/v1/feed";
     protected static final String API_PARAMETER_START_DATE = "start_date";
     protected static final String API_PARAMETER_END_DATE = "end_date";
@@ -58,7 +57,7 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
                 ))
                 .collect(Collectors.toList());
 
-        //Ordenamos según diámetro
+        //Ordenamos según diámetro (reversed: de mayor a menor)
         filteredAsteroidsDTO.sort(Comparator.comparing(AsteroidDTO::getDiameter).reversed());
 
         //Enviamos los 3 más grandes de diametro
@@ -70,6 +69,7 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         String API_REQUEST = API_REQUEST_ENDPOINT + "?" + API_PARAMETER_START_DATE + "=" + dateStart
                 + "&" + API_PARAMETER_END_DATE + "=" + dateEnd + "&" + API_PARAMETER_KEY + "=" + API_KEY;
 
+//        Consultar forma de implementación de esta forma de envío de parámetros
 //        Map<String, String> params = new HashMap<>();
 //        params.put(API_PARAMETER_KEY, API_KEY);
 //        params.put(API_PARAMETER_START_DATE, dateStart.toString());

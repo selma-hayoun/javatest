@@ -13,6 +13,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
+    /**
+     * Sobreescribimos este método para que las excepciones sigan el formato creado en ApiError
+     *
+     * @param ex
+     * @param body
+     * @param headers
+     * @param status
+     * @param request
+     * @return
+     */
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ApiError apiError = new ApiError(status, ex.getMessage());

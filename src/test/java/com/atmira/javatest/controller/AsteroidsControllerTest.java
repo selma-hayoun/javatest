@@ -52,17 +52,27 @@ public class AsteroidsControllerTest {
         LOG.info("@BeforeEach - executes once before each test method in AsteroidsControllerTest");
     }
 
-    //getAsteroids() from AsteroidsController
+    /**
+     * Test método getAsteroids() del controlador dado planeta correcto en fechas correctas
+     *
+     * @throws Exception
+     */
     @Test
     public void givenCorrectPlanetParameter_whenCallingGetAsteroids_thenShouldReturnCorrectResponse() throws Exception {
         //Asignamos el planeta de la petición
         planet = "Earth";
 
-        //ASSERT
         assertThat(asteroidsController.getAsteroids(planet)).isEqualTo(ResponseEntity.ok(filteredAsteroidsDTO));
     }
 
-    //getAsteroids() EXCEPTIONS from AsteroidsController
+
+    /**
+     * Test método getAsteroids() del controlador: caso de lanzamiento de excepción NotSupportedPlanetException
+     *
+     * Planeta suministrado no es Earth, único del cual suministra datos la API consultada
+     *
+     * @throws Exception
+     */
     @Test
     public void givenNotSupportedPlanet_whenCallingGetAsteroids_thenExpectedNotSupportedPlanetException() throws Exception {
         planet = "Uranus";
@@ -74,6 +84,13 @@ public class AsteroidsControllerTest {
         Assertions.assertEquals("No Data Collected for planet: ".concat(planet), thrown.getMessage());
     }
 
+    /**
+     * Test método getAsteroids() del controlador: caso de lanzamiento de excepción NotSupportedPlanetException
+     *
+     * Suministrado parámetro vacío
+     *
+     * @throws Exception
+     */
     @Test
     public void givenEmptyPlanet_whenCallingGetAsteroids_thenExpectedNotSupportedPlanetException() throws Exception {
         planet = "";
@@ -85,6 +102,12 @@ public class AsteroidsControllerTest {
         Assertions.assertEquals("Planet name required", thrown.getMessage());
     }
 
+    /**
+     * Test método getAsteroids() del controlador: caso de lanzamiento de excepción NotAsteroidsFoundException
+     *
+     *
+     * @throws Exception
+     */
     @Test
     public void givenPlanetWithNoHazardousAsteroids_whenCallingGetAsteroids_thenExpectedNotAsteroidsFoundException() throws Exception {
         planet = "Earth";

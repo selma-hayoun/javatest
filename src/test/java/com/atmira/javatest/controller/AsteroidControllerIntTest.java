@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AsteroidControllerIntegrationTest {
+public class AsteroidControllerIntTest {
 
     @LocalServerPort
     private int port;
@@ -21,17 +21,24 @@ public class AsteroidControllerIntegrationTest {
     private static final String URL_RESOURCE_START = "http://localhost:";
     private static final String URL_RESOURCE_END = "/asteroids?planet=";
 
+    /**
+     * Test de conexión a nuestra API: caso parámetro correcto
+     */
     @Test
     public void givenCorrectPlanet_integrated_thenShouldGetAsteroidsOk(){
         String planet = "earth";
 
         ResponseEntity<String> response = restTemplate.getForEntity(URL_RESOURCE_START + port + URL_RESOURCE_END + planet, String.class);
 
-//        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);//No siempre será true, dado que no se envían las fechas como parámetro no se puede controlar
-
+        //No siempre será true, dado que no se envían las fechas como parámetro no se puede controlar
+        //Prodría que en el listado total ninguno tuviera riesgo de impacto
+//        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
         Assertions.assertTrue(!response.getBody().isEmpty());
     }
 
+    /**
+     * Test conexión a nuestra API: caso parámetro incorrecto o vacío
+     */
     @Test
     public void givenIncorrectPlanet_integrated_thenShouldGet404(){
         String planetA = "uranus";
@@ -44,6 +51,9 @@ public class AsteroidControllerIntegrationTest {
         Assertions.assertEquals(responseB.getStatusCode(), HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Test de conexión a nuestra API: no enviado parámetro Planet
+     */
     @Test
     public void givenNoPlanetParameter_integrated_thenShouldGet400(){
         ResponseEntity<String> response = restTemplate.getForEntity(URL_RESOURCE_START + port + "/asteroids", String.class);
