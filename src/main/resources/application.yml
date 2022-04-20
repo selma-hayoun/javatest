@@ -1,0 +1,5 @@
+api-key: zdUP8ElJv1cehFM0rsZVSQN7uBVxlDnu4diHlLSb
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER

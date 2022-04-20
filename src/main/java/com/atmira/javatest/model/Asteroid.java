@@ -15,6 +15,9 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Asteroid implements Serializable {
+
+    private static final long serialVersionUID = -8743460818704181661L;
+
     private String name;
     private AsteroidEstimatedDiameter estimated_diameter;
     //Añadí la propiedad porque no me estaba mapeando el campo aun llamándose igual e inicializaba todos a false

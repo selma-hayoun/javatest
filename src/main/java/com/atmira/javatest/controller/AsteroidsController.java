@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("asteroids")
 public class AsteroidsController {
 
     @Autowired
@@ -34,10 +34,10 @@ public class AsteroidsController {
             @ApiResponse(code = 400, message = "Bad request"),
             @ApiResponse(code = 404, message = "Not Found: no asteroids found that match the requirements or no data collected for the given planet"),
             @ApiResponse(code = 500, message = "Unexpected error") })
-    @RequestMapping(value = "asteroids", //Cambié a esta etiqueta desde @GetMapping para que salieran los campos de swagger correctamente
+    @RequestMapping(value = "", //Cambié a esta etiqueta desde @GetMapping para que salieran los campos de swagger correctamente
             produces = {"application/json"},
             method = RequestMethod.GET)
-    public ResponseEntity<?> getAsteroids(@RequestParam(name = "planet") @ApiParam(name = "planet", value = "Planet name", example = "Earth") String planet) {
+    public ResponseEntity<List<AsteroidDTO>> getAsteroids(@RequestParam(name = "planet") @ApiParam(name = "planet", value = "Planet name", example = "Earth") String planet) {
         //Control de parámetro vacío y planeta diferente a Earth con excepción propia
         if(planet.isEmpty() || !planet.equalsIgnoreCase("EARTH")){
             throw new NotSupportedPlanetException(planet);
