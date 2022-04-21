@@ -1,0 +1,4 @@
+2022-04-20 14:41:48,737 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting JavatestApplication using Java 1.8.0_291 on AM-MAD-POR-308 with PID 18564 (C:\Users\selma.hayoun\0_repos_atmira\javatest\target\classes started by selma.hayoun in C:\Users\selma.hayoun\0_repos_atmira\javatest)
+2022-04-20 14:41:48,745 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-04-20 14:41:48,747 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-20 14:41:58,624 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started JavatestApplication in 11.807 seconds (JVM running for 27.006)

@@ -1,4 +1,14 @@
-2022-04-20 14:41:48,737 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting JavatestApplication using Java 1.8.0_291 on AM-MAD-POR-308 with PID 18564 (C:\Users\selma.hayoun\0_repos_atmira\javatest\target\classes started by selma.hayoun in C:\Users\selma.hayoun\0_repos_atmira\javatest)
-2022-04-20 14:41:48,745 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.6.6, Spring v5.3.18
-2022-04-20 14:41:48,747 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2022-04-20 14:41:58,624 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started JavatestApplication in 11.807 seconds (JVM running for 27.006)
+2022-04-21 09:10:01,397 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting JavatestApplication using Java 1.8.0_291 on AM-MAD-POR-308 with PID 13652 (C:\Users\selma.hayoun\0_repos_atmira\javatest\target\classes started by selma.hayoun in C:\Users\selma.hayoun\0_repos_atmira\javatest)
+2022-04-21 09:10:01,417 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-04-21 09:10:01,418 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-21 09:10:08,690 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started JavatestApplication in 9.063 seconds (JVM running for 11.52)
+2022-04-21 09:11:27,647 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-4] [preHandle][org.apache.catalina.connector.RequestFacade@5e39d1f8][GET]/asteroids
+2022-04-21 09:11:29,873 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-4] [afterCompletion][org.apache.catalina.connector.RequestFacade@5e39d1f8][exception: null]
+2022-04-21 09:31:21,157 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting JavatestApplication using Java 1.8.0_291 on AM-MAD-POR-308 with PID 1128 (C:\Users\selma.hayoun\0_repos_atmira\javatest\target\classes started by selma.hayoun in C:\Users\selma.hayoun\0_repos_atmira\javatest)
+2022-04-21 09:31:21,159 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-04-21 09:31:21,161 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-21 09:31:29,486 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started JavatestApplication in 9.924 seconds (JVM running for 11.932)
+2022-04-21 09:32:14,312 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-7] [preHandle][org.apache.catalina.connector.RequestFacade@4d01b447][GET]/asteroids
+2022-04-21 09:32:14,450 INFO com.atmira.javatest.interceptor.AsteroidsRestTemplateInterceptor [http-nio-8080-exec-7] [REST TEMPLATE INTERCEPTOR] - REQUEST: org.springframework.http.client.InterceptingClientHttpRequest@29a323a3
+2022-04-21 09:32:16,253 INFO com.atmira.javatest.interceptor.AsteroidsRestTemplateInterceptor [http-nio-8080-exec-7] [REST TEMPLATE INTERCEPTOR] - RESPONSE: org.springframework.http.client.SimpleClientHttpResponse@4ecb1107
+2022-04-21 09:32:16,578 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-7] [afterCompletion][org.apache.catalina.connector.RequestFacade@4d01b447][exception: null]
