@@ -1,0 +1,21 @@
+2022-04-21 13:37:43,405 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting JavatestApplication using Java 1.8.0_261 on DESKTOP-FELICITY with PID 21468 (C:\Users\pastu\Dropbox\2_DAM\0_repos\Intellij\javatest\target\classes started by pastu in C:\Users\pastu\Dropbox\2_DAM\0_repos\Intellij\javatest)
+2022-04-21 13:37:43,407 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-21 13:37:45,460 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started JavatestApplication in 2.495 seconds (JVM running for 2.959)
+2022-04-21 13:37:52,479 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-1] [PREHANDLE: Recepción de petición al controlador][GET]/asteroids?planet=%20
+2022-04-21 13:37:52,529 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-1] [AFTERCOMPLETION: Respuesta controlador][Https status: 404]
+2022-04-21 13:37:58,271 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-2] [PREHANDLE: Recepción de petición al controlador][GET]/asteroids?planet=Earth
+2022-04-21 13:37:58,311 INFO com.atmira.javatest.interceptor.AsteroidsRestTemplateInterceptor [http-nio-8080-exec-2] [REST TEMPLATE INTERCEPTOR] - REQUEST TO NASA: [GET]https://api.nasa.gov/neo/rest/v1/feed?start_date=2022-04-21&end_date=2022-04-28
+2022-04-21 13:37:59,001 INFO com.atmira.javatest.interceptor.AsteroidsRestTemplateInterceptor [http-nio-8080-exec-2] [REST TEMPLATE INTERCEPTOR] - RESPONSE FROM NASA: [Https status: 200 OK]
+2022-04-21 13:37:59,290 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-2] [AFTERCOMPLETION: Respuesta controlador][Https status: 200]
+2022-04-21 13:38:54,751 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting JavatestApplication using Java 1.8.0_261 on DESKTOP-FELICITY with PID 14480 (C:\Users\pastu\Dropbox\2_DAM\0_repos\Intellij\javatest\target\classes started by pastu in C:\Users\pastu\Dropbox\2_DAM\0_repos\Intellij\javatest)
+2022-04-21 13:38:54,752 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-04-21 13:38:54,753 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2022-04-21 13:38:56,746 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started JavatestApplication in 2.442 seconds (JVM running for 2.863)
+2022-04-21 13:39:03,025 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-1] [PREHANDLE: Recepción de petición al controlador][GET]/asteroids?planet=ura
+2022-04-21 13:39:03,071 INFO com.atmira.javatest.interceptor.AsteroidsRequestInterceptor [http-nio-8080-exec-1] [AFTERCOMPLETION: Respuesta controlador][Https status: 404]
+2022-04-21 13:48:36,987 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-2] HOLA
+2022-04-21 13:50:58,084 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-3] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'planet' for method parameter type String is not present]
+2022-04-21 13:51:00,372 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-2] HOLA
+2022-04-21 13:51:07,950 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-4] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: No Data Collected for planet: URANO]
+2022-04-21 13:51:09,634 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-5] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: No Data Collected for planet: URANO]
+2022-04-21 13:51:12,451 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-1] HOLA

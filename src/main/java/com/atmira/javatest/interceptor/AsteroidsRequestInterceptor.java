@@ -24,8 +24,8 @@ public class AsteroidsRequestInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        return HandlerInterceptor.super.preHandle(request, response, handler);
 
-        log.info("[PREHANDLE: Request entering the controller][" + request + "]" + "[" + request.getMethod()
-                + "]" + request.getRequestURI());
+        log.info("[PREHANDLE: Recepción de petición al controlador]"+ "[" + request.getMethod()
+                + "]" + request.getRequestURI() + "?" + request.getQueryString());
 
         return true;
 
@@ -47,6 +47,7 @@ public class AsteroidsRequestInterceptor implements HandlerInterceptor {
         if (ex != null){
             ex.printStackTrace();
         }
-        log.info("[afterCompletion][" + request + "][exception: " + ex + "]");
+
+        log.info("[AFTERCOMPLETION: Respuesta controlador]" + "[Https status: " + response.getStatus() + "]" + (ex==null?"":("][exception: " + ex + "]")));
     }
 }

@@ -2,12 +2,15 @@
 <configuration>
 
     <property name="LOGS" value="./logs" />
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="LOG_ENCODER_PATTERN" value="%d %p %C{1.} [%t] %m%n"/>
+    <property name="LOG_FILE_ID" value="%d{yyyy-MM-dd}.%i.log"/>
 
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+                ${LOG_PATTERN}
             </Pattern>
         </layout>
     </appender>
@@ -17,13 +20,13 @@
         <file>${LOGS}/spring-boot-logger.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+            <Pattern>${LOG_ENCODER_PATTERN}</Pattern>
         </encoder>
 
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily and when the file reaches 10 MegaBytes -->
-            <fileNamePattern>${LOGS}/archived/spring-boot-logger-%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>${LOGS}/archived/spring-boot-logger-${LOG_FILE_ID}
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -41,13 +44,13 @@
         </filter>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+            <Pattern>${LOG_ENCODER_PATTERN}</Pattern>
         </encoder>
 
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily and when the file reaches 10 MegaBytes -->
-            <fileNamePattern>${LOGS}/archived/severe-logger-%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>${LOGS}/archived/severe-logger-${LOG_FILE_ID}
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -63,6 +66,13 @@
 
     <!-- LOG "com.atmira.javatest" package at TRACE level -->
     <logger name="com.atmira.javatest" level="trace" additivity="false">
+        <appender-ref ref="SevereRollingFile" />
+        <appender-ref ref="RollingFile" />
+        <appender-ref ref="Console" />
+    </logger>
+
+    <!-- LOG "org.springframework" package at WARN level -->
+    <logger name="org.springframework" level="warn" additivity="false">
         <appender-ref ref="SevereRollingFile" />
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />

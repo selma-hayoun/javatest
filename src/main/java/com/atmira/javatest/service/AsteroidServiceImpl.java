@@ -4,6 +4,7 @@ import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.model.Asteroid;
 import com.atmira.javatest.model.NearEarthObjects;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class AsteroidServiceImpl implements AsteroidServiceI {
 
@@ -60,6 +62,8 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         //Ordenamos según diámetro (reversed: de mayor a menor)
         filteredAsteroidsDTO.sort(Comparator.comparing(AsteroidDTO::getDiameter).reversed());
 
+        log.error("HOLA");
+
         //Enviamos los 3 más grandes de diametro
         return filteredAsteroidsDTO.stream().limit(3).collect(Collectors.toList());
     }
@@ -77,8 +81,8 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(API_REQUEST_ENDPOINT)
                 .queryParam(API_PARAMETER_START_DATE, dateStart)
-                .queryParam(API_PARAMETER_END_DATE, dateEnd)
-                .queryParam(API_PARAMETER_KEY, API_KEY);
+                .queryParam(API_PARAMETER_END_DATE, dateEnd);
+//                .queryParam(API_PARAMETER_KEY, API_KEY);
 
         String uriBuilder = builder.build().encode().toUriString();
 
