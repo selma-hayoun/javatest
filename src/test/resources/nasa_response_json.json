@@ -5082,8 +5082,8 @@
 			"absolute_magnitude_h": 19.23,
 			"estimated_diameter": {
 				"kilometers": {
-					"estimated_diameter_min": 0.3789264984,
-					"estimated_diameter_max": 0.8473054089
+					"estimated_diameter_min": 0.36354232,
+					"estimated_diameter_max": 0.8129054
 				},
 				"meters": {
 					"estimated_diameter_min": 378.9264983795,
@@ -5105,7 +5105,7 @@
 				"epoch_date_close_approach": 1600045140000,
 				"relative_velocity": {
 					"kilometers_per_second": "17.8248914662",
-					"kilometers_per_hour": "64169.6092784042",
+					"kilometers_per_hour": "64169.6113983391",
 					"miles_per_hour": "39872.4997207951"
 				},
 				"miss_distance": {

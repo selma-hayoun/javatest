@@ -19,3 +19,18 @@
 2022-04-21 13:51:07,950 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-4] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: No Data Collected for planet: URANO]
 2022-04-21 13:51:09,634 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-5] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: No Data Collected for planet: URANO]
 2022-04-21 13:51:12,451 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-1] HOLA
+2022-04-21 14:03:06,069 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-5] Resolved [org.springframework.web.client.HttpClientErrorException$Forbidden: 403 Forbidden: "{<EOL>  "error": {<EOL>    "code": "API_KEY_MISSING",<EOL>    "message": "No api_key was supplied. Get one at https://api.nasa.gov:443"<EOL>  }<EOL>}"]
+2022-04-21 14:05:04,455 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-2] HOLA
+2022-04-21 14:10:43,869 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-5] HOLA
+2022-04-21 14:10:50,921 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-6] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: No Data Collected for planet: plutón]
+2022-04-21 14:11:02,060 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-7] HOLA
+2022-04-21 14:11:04,263 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-8] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'planet' for method parameter type String is not present]
+2022-04-21 14:11:16,519 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-9] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: Planet name required]
+2022-04-21 14:23:02,829 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-5] HOLA
+2022-04-21 14:23:07,906 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-6] HOLA
+2022-04-21 14:23:13,104 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-7] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: No Data Collected for planet: ooo]
+2022-04-21 14:23:24,841 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-8] HOLA
+2022-04-21 14:32:05,111 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-5] HOLA
+2022-04-21 14:39:17,681 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-5] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: No Data Collected for planet: saturno]
+2022-04-21 14:39:35,928 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-9] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'planet' for method parameter type String is not present]
+2022-04-21 14:39:44,365 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-10] Resolved [com.atmira.javatest.exception.NotSupportedPlanetException: Planet name required]

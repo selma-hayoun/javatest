@@ -3,6 +3,7 @@ package com.atmira.javatest.service;
 import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.model.NearEarthObjects;
 import com.atmira.javatest.util.NasaDummyDataUtil;
+import com.atmira.javatest.utils.JavaTestConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -56,13 +58,15 @@ public class AsteroidServiceTest {
         LocalDate dateStart = LocalDate.parse("2020-09-09");
         LocalDate dateEnd = LocalDate.parse("2020-09-16");
 
-        String API_REQUEST = asteroidService.API_REQUEST_ENDPOINT + "?" + asteroidService.API_PARAMETER_START_DATE + "=" + dateStart
-                + "&" + asteroidService.API_PARAMETER_END_DATE + "=" + dateEnd + "&" + asteroidService.API_PARAMETER_KEY + "=" + asteroidService.API_KEY;
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(JavaTestConstants.API_REQUEST_ENDPOINT)
+                .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
+                .queryParam(JavaTestConstants.API_PARAMETER_END_DATE, dateEnd);
 
+        String uriBuilder = builder.build().encode().toUriString();
         nearEarthObjectsResponseEntity = ResponseEntity.ok( (NearEarthObjects) nasaDummyDataUtil.getNasaResponseDummyData("nasa_response_json.json", Optional.of(new NearEarthObjects())).get());
 
         //Para que el método apiCall tenga datos - simulamos la llamada con los datos del json
-        when(restTemplate.getForEntity(API_REQUEST, NearEarthObjects.class)).thenReturn(nearEarthObjectsResponseEntity);
+        when(restTemplate.getForEntity(uriBuilder, NearEarthObjects.class)).thenReturn(nearEarthObjectsResponseEntity);
 
         assertThat(asteroidService.apiCall(dateStart, dateEnd)).isEqualTo(nearEarthObjectsResponseEntity.getBody());
     }
@@ -83,13 +87,15 @@ public class AsteroidServiceTest {
         LocalDate dateStart = LocalDate.parse("2020-09-09");
         LocalDate dateEnd = LocalDate.parse("2020-09-16");
 
-        String API_REQUEST = asteroidService.API_REQUEST_ENDPOINT + "?" + asteroidService.API_PARAMETER_START_DATE + "=" + dateStart
-                + "&" + asteroidService.API_PARAMETER_END_DATE + "=" + dateEnd + "&" + asteroidService.API_PARAMETER_KEY + "=" + asteroidService.API_KEY;
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(JavaTestConstants.API_REQUEST_ENDPOINT)
+                .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
+                .queryParam(JavaTestConstants.API_PARAMETER_END_DATE, dateEnd);
 
+        String uriBuilder = builder.build().encode().toUriString();
         nearEarthObjectsResponseEntity = ResponseEntity.ok( (NearEarthObjects) nasaDummyDataUtil.getNasaResponseDummyData("nasa_response_json.json", Optional.of(new NearEarthObjects())).get());
 
         //Para que el método apiCall tenga datos - simulamos la llamada con los datos del json
-        when(restTemplate.getForEntity(API_REQUEST, NearEarthObjects.class)).thenReturn(nearEarthObjectsResponseEntity);
+        when(restTemplate.getForEntity(uriBuilder, NearEarthObjects.class)).thenReturn(nearEarthObjectsResponseEntity);
 
         List<AsteroidDTO> asteroidDTOListExpected = new ArrayList<>();
         asteroidDTOListExpected = (List<AsteroidDTO>) nasaDummyDataUtil.getNasaResponseDummyData("asteroids_test_result.json", Optional.of(asteroidDTOListExpected)).get();

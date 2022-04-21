@@ -10,6 +10,7 @@ import org.springframework.http.client.ClientHttpResponse;
 
 
 import org.springframework.http.client.support.HttpRequestWrapper;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -22,13 +23,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Component
 public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterceptor {
 
     protected static final String API_PARAMETER_KEY = "api_key";
 
-//    @Value("${api-key}")
-//    protected String API_KEY;
-    protected static final String API_KEY = "zdUP8ElJv1cehFM0rsZVSQN7uBVxlDnu4diHlLSb";
+    @Value("${api-key}")
+    protected String API_KEY;
 
     /**
      * This interceptor will be invoked for every incoming request
@@ -86,7 +87,7 @@ public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterc
             log.debug("Status code  : {}", response.getStatusCode());
             log.debug("Status text  : {}", response.getStatusText());
             log.debug("Headers      : {}", response.getHeaders());
-            log.debug("Response body: {}", StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
+            log.debug("Response body: {}", StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));//TO-DO: Mientras refactoring y tratamiento de logs
             log.debug("=======================RESPONSE INFO END=================================================");
         }
     }

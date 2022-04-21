@@ -19,10 +19,13 @@ public class Asteroid implements Serializable {
     private static final long serialVersionUID = -8743460818704181661L;
 
     private String name;
-    private AsteroidEstimatedDiameter estimated_diameter;
-    //Añadí la propiedad porque no me estaba mapeando el campo aun llamándose igual e inicializaba todos a false
+    @JsonProperty("estimated_diameter")
+    private AsteroidEstimatedDiameter estimatedDiameter;
+
     @JsonProperty("is_potentially_hazardous_asteroid")
-    private boolean is_potentially_hazardous_asteroid;
-    private AsteroidCloseApproachData[] close_approach_data;
+    private boolean isPotentiallyHazardousAsteroid;
+
+    @JsonProperty("close_approach_data")
+    private AsteroidCloseApproachData[] closeApproachData;
 
 }

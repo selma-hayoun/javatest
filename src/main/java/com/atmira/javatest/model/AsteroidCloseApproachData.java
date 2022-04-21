@@ -3,6 +3,7 @@ package com.atmira.javatest.model;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,15 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AsteroidCloseApproachData implements Serializable {
-    private Date close_approach_date;
-    private Map<String, Float> relative_velocity;
-    private String orbiting_body;
+
+    @JsonProperty("close_approach_date")
+    private Date closeApproachDate;
+
+    @JsonProperty("relative_velocity")
+    private Map<String, Float> relativeVelocity;
+
+    @JsonProperty("orbiting_body")
+    private String orbitingBody;
 
     /**
      * JsonAnyGetter
@@ -28,7 +35,7 @@ public class AsteroidCloseApproachData implements Serializable {
      * @return
      */
     @JsonAnyGetter
-    public Map<String, Float> getRelative_velocity() {
-        return relative_velocity;
+    public Map<String, Float> getRelativeVelocity() {
+        return relativeVelocity;
     }
 }

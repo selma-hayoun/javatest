@@ -2,6 +2,7 @@ package com.atmira.javatest.configuration;
 
 import com.atmira.javatest.interceptor.AsteroidsRestTemplateInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,9 @@ import java.util.List;
 @Slf4j
 @Configuration
 public class RestClientConfig {
+
+    @Autowired
+    private AsteroidsRestTemplateInterceptor asteroidsRestTemplateInterceptor;
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
@@ -39,7 +43,7 @@ public class RestClientConfig {
             interceptors = new ArrayList<>();
         }
 
-        interceptors.add(new AsteroidsRestTemplateInterceptor());
+        interceptors.add(asteroidsRestTemplateInterceptor);
 
         restTemplate.setInterceptors(interceptors);
         return restTemplate;

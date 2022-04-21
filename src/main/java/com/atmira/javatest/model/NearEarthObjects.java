@@ -18,8 +18,9 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class NearEarthObjects implements Serializable {
+
     @JsonProperty("near_earth_objects")
-    private Map<String, List<Asteroid>> near_earth_objects;
+    private Map<String, List<Asteroid>> nearEarthObjects;
 
     /**
      * JsonAnyGetter
@@ -28,7 +29,7 @@ public class NearEarthObjects implements Serializable {
      * @return
      */
     @JsonAnyGetter
-    public Map<String, List<Asteroid>> getNear_earth_objects() {
-        return near_earth_objects;
+    public Map<String, List<Asteroid>> getNearEarthObjects() {
+        return nearEarthObjects;
     }
 }
