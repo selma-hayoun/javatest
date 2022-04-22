@@ -5,32 +5,26 @@ import com.atmira.javatest.model.Asteroid;
 import com.atmira.javatest.model.NearEarthObjects;
 import com.atmira.javatest.utils.JavaTestConstants;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
+
 @Service
 public class AsteroidServiceImpl implements AsteroidServiceI {
 
     @Autowired
     @Setter
     private RestTemplate restTemplate;
-
-
-    @Value("${api-key}")
-    protected String API_KEY;
 
     @Override
     public List<AsteroidDTO> findAllAsteroids(String planet, LocalDate dateStart, LocalDate dateEnd) {

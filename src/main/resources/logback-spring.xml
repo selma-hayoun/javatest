@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Logback architecture = three classes: Logger, Appender, Layout.-->
 <configuration>
 
+    <!--File variables-->
     <property name="LOGS" value="./logs" />
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+    <!--<property name="LOG_PATTERN" value="%boldWhite(%d{ISO8601}) %cyan([%thread]) %highlight(%-5level) %highlight(%logger{5}) %green(%caller{3})- %magenta(%msg%n)"/>-->
+    <property name="LOG_PATTERN" value="%boldWhite(%d{ISO8601}) %cyan([%thread]) %highlight(%-5level) %highlight(%logger{5}) %boldRed(%rEx{1}) - %magenta(%msg%n)"/>
     <property name="LOG_ENCODER_PATTERN" value="%d %p %C{1.} [%t] %m%n"/>
     <property name="LOG_FILE_ID" value="%d{yyyy-MM-dd}.%i.log"/>
 
+    <!--APPENDER: place log messages in their final destination (console, file or others)-->
+    <!--Appender for console logs. Configure console logs here-->
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
+        <!--LAYOUT prepares messages for outputting, format them-->
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
                 ${LOG_PATTERN}
@@ -59,13 +65,16 @@
         </rollingPolicy>
     </appender>
 
-    <!-- LOG everything at INFO level -->
+    <!-- LOG everything at INFO level with Appender Console-->
+    <!--This tag sets the root logger to DEBUG mode, and associates its output with the Appender named Console-->
     <root level="info">
         <appender-ref ref="Console" />
     </root>
 
+    <!--A LOGGER is a context for log messages. It creates the log messages-->
     <!-- LOG "com.atmira.javatest" package at TRACE level -->
     <logger name="com.atmira.javatest" level="trace" additivity="false">
+        <!--APPENDERS added to the specific LOGGER context-->
         <appender-ref ref="SevereRollingFile" />
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />

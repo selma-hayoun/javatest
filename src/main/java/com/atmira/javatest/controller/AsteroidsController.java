@@ -4,6 +4,7 @@ import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.exception.NotAsteroidsFoundException;
 import com.atmira.javatest.exception.NotSupportedPlanetException;
 import com.atmira.javatest.service.AsteroidServiceI;
+import com.atmira.javatest.utils.JavaTestConstants;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -39,7 +40,7 @@ public class AsteroidsController {
             method = RequestMethod.GET)
     public ResponseEntity<List<AsteroidDTO>> getAsteroids(@RequestParam(name = "planet") @ApiParam(name = "planet", value = "Planet name", example = "Earth") String planet) {
         //Control de parámetro vacío y planeta diferente a Earth con excepción propia
-        if(planet.isEmpty() || !planet.equalsIgnoreCase("EARTH")){
+        if(planet.isEmpty() || !planet.equalsIgnoreCase(JavaTestConstants.STR_PLANET_EARTH)){
             throw new NotSupportedPlanetException(planet);
         }
 

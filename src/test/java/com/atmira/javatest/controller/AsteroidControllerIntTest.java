@@ -1,5 +1,6 @@
 package com.atmira.javatest.controller;
 
+import com.atmira.javatest.utils.JavaTestConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +19,14 @@ public class AsteroidControllerIntTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private static final String URL_RESOURCE_START = "http://localhost:";
-    private static final String URL_RESOURCE_END = "/asteroids?planet=";
-
     /**
      * Test de conexión a nuestra API: caso parámetro correcto
      */
     @Test
     public void givenCorrectPlanet_integrated_thenShouldGetAsteroidsOk(){
-        String planet = "earth";
+        String planet = JavaTestConstants.STR_PLANET_EARTH;
 
-        ResponseEntity<String> response = restTemplate.getForEntity(URL_RESOURCE_START + port + URL_RESOURCE_END + planet, String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(JavaTestConstants.URL_RESOURCE_START + port + JavaTestConstants.URL_RESOURCE_END + planet, String.class);
 
         //No siempre será true, dado que no se envían las fechas como parámetro no se puede controlar
         //Prodría que en el listado total ninguno tuviera riesgo de impacto
@@ -41,11 +39,11 @@ public class AsteroidControllerIntTest {
      */
     @Test
     public void givenIncorrectPlanet_integrated_thenShouldGet404(){
-        String planetA = "uranus";
-        String planetB = "";
+        String planetA = JavaTestConstants.STR_PLANET_URANUS;
+        String planetB = JavaTestConstants.STR_EMPTY;
 
-        ResponseEntity<String> responseA = restTemplate.getForEntity(URL_RESOURCE_START + port + URL_RESOURCE_END + planetA, String.class);
-        ResponseEntity<String> responseB = restTemplate.getForEntity(URL_RESOURCE_START + port + URL_RESOURCE_END + planetB, String.class);
+        ResponseEntity<String> responseA = restTemplate.getForEntity(JavaTestConstants.URL_RESOURCE_START + port + JavaTestConstants.URL_RESOURCE_END + planetA, String.class);
+        ResponseEntity<String> responseB = restTemplate.getForEntity(JavaTestConstants.URL_RESOURCE_START + port + JavaTestConstants.URL_RESOURCE_END + planetB, String.class);
 
         Assertions.assertEquals(responseA.getStatusCode(), HttpStatus.NOT_FOUND);
         Assertions.assertEquals(responseB.getStatusCode(), HttpStatus.NOT_FOUND);
@@ -56,7 +54,7 @@ public class AsteroidControllerIntTest {
      */
     @Test
     public void givenNoPlanetParameter_integrated_thenShouldGet400(){
-        ResponseEntity<String> response = restTemplate.getForEntity(URL_RESOURCE_START + port + "/asteroids", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(JavaTestConstants.URL_RESOURCE_START + port + "/asteroids", String.class);
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.BAD_REQUEST);
     }
 }

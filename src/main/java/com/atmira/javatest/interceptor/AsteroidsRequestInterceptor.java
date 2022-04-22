@@ -24,8 +24,8 @@ public class AsteroidsRequestInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        return HandlerInterceptor.super.preHandle(request, response, handler);
 
-        log.info("[PREHANDLE: Recepción de petición al controlador]"+ "[" + request.getMethod()
-                + "]" + request.getRequestURI() + "?" + request.getQueryString());
+        //The braces {} will accept any Object and uses its toString() method to build a message only after verifying that the log message is required.
+        log.info("[PREHANDLE: Recepción de petición al controlador][{}]{}?{}", request.getMethod(), request.getRequestURI(), request.getQueryString());
 
         return true;
 

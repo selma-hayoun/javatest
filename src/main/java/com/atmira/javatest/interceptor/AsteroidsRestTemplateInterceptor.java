@@ -1,32 +1,22 @@
 package com.atmira.javatest.interceptor;
 
+import com.atmira.javatest.utils.JavaTestConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
-import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
-
-
 import org.springframework.http.client.support.HttpRequestWrapper;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StreamUtils;
-import org.springframework.web.util.ContentCachingResponseWrapper;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
 import java.net.URI;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterceptor {
-
-    protected static final String API_PARAMETER_KEY = "api_key";
 
     @Value("${api-key}")
     protected String API_KEY;
@@ -48,7 +38,7 @@ public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterc
 
         //Modificamos la petición: añadir API key
         URI uri = UriComponentsBuilder.fromHttpRequest(request)
-                .queryParam(API_PARAMETER_KEY, API_KEY)
+                .queryParam(JavaTestConstants.API_PARAMETER_KEY, API_KEY)
                 .build().toUri();
 
         HttpRequest modifiedRequest = new HttpRequestWrapper(request) {
@@ -87,7 +77,7 @@ public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterc
             log.debug("Status code  : {}", response.getStatusCode());
             log.debug("Status text  : {}", response.getStatusText());
             log.debug("Headers      : {}", response.getHeaders());
-            log.debug("Response body: {}", StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));//TO-DO: Mientras refactoring y tratamiento de logs
+//            log.debug("Response body: {}", StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));//TO-DO: Mientras refactoring y tratamiento de logs
             log.debug("=======================RESPONSE INFO END=================================================");
         }
     }

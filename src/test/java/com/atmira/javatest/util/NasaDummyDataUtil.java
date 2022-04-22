@@ -5,6 +5,7 @@ import com.atmira.javatest.model.NearEarthObjects;
 import com.atmira.javatest.service.AsteroidServiceTest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class NasaDummyDataUtil {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AsteroidServiceTest.class);
     private ObjectMapper objectMapper;
     private ResponseEntity<NearEarthObjects> nearEarthObjectsResponseEntity;
 
@@ -41,7 +42,7 @@ public class NasaDummyDataUtil {
             }
 
         } catch (IOException e) {
-            LOG.info("getNasaResponseDummyData() parsing json file ERROR - " + e.getMessage());
+            log.info("getNasaResponseDummyData() parsing json file ERROR - " + e.getMessage());
         }
         return result;
     }

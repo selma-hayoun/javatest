@@ -5,6 +5,8 @@ import com.atmira.javatest.exception.NotAsteroidsFoundException;
 import com.atmira.javatest.exception.NotSupportedPlanetException;
 import com.atmira.javatest.service.AsteroidServiceI;
 import com.atmira.javatest.util.NasaDummyDataUtil;
+import com.atmira.javatest.utils.JavaTestConstants;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,9 +24,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+@Slf4j
 public class AsteroidsControllerTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AsteroidsControllerTest.class);
     private String planet;
     private AsteroidServiceI asteroidService;
     private AsteroidsController asteroidsController;
@@ -49,7 +51,7 @@ public class AsteroidsControllerTest {
         //Ahora mockeamos para cuando haga la llamada con el servicio, devuelva lo que queramos
         when(asteroidService.findAllAsteroids(anyString(), any(), any())).thenReturn(filteredAsteroidsDTO);
 
-        LOG.info("@BeforeEach - executes once before each test method in AsteroidsControllerTest");
+        log.info("@BeforeEach - executes once before each test method in AsteroidsControllerTest");
     }
 
     /**
@@ -60,7 +62,7 @@ public class AsteroidsControllerTest {
     @Test
     public void givenCorrectPlanetParameter_whenCallingGetAsteroids_thenShouldReturnCorrectResponse() throws Exception {
         //Asignamos el planeta de la petición
-        planet = "Earth";
+        planet = JavaTestConstants.STR_PLANET_EARTH;
 
         assertThat(asteroidsController.getAsteroids(planet)).isEqualTo(ResponseEntity.ok(filteredAsteroidsDTO));
     }
@@ -93,7 +95,7 @@ public class AsteroidsControllerTest {
      */
     @Test
     public void givenEmptyPlanet_whenCallingGetAsteroids_thenExpectedNotSupportedPlanetException() throws Exception {
-        planet = "";
+        planet = JavaTestConstants.STR_EMPTY;
 
         NotSupportedPlanetException thrown = Assertions.assertThrows(NotSupportedPlanetException.class, () -> {
             asteroidsController.getAsteroids(planet);
@@ -110,7 +112,7 @@ public class AsteroidsControllerTest {
      */
     @Test
     public void givenPlanetWithNoHazardousAsteroids_whenCallingGetAsteroids_thenExpectedNotAsteroidsFoundException() throws Exception {
-        planet = "Earth";
+        planet = JavaTestConstants.STR_PLANET_EARTH;
         List<AsteroidDTO> emptyList = new ArrayList<>();
 
         //Ahora mockeamos para cuando haga la llamada con el servicio, devuelva lo que queramos

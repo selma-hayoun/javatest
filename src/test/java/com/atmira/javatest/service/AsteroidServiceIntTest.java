@@ -2,6 +2,8 @@ package com.atmira.javatest.service;
 
 import com.atmira.javatest.dto.AsteroidDTO;
 import com.atmira.javatest.util.NasaDummyDataUtil;
+import com.atmira.javatest.utils.JavaTestConstants;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -16,10 +18,10 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @SpringBootTest
 public class AsteroidServiceIntTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AsteroidServiceIntTest.class);
     private String planet;
     private NasaDummyDataUtil nasaDummyDataUtil;
 
@@ -29,7 +31,7 @@ public class AsteroidServiceIntTest {
     @BeforeEach
     public void setup() {
         nasaDummyDataUtil = new NasaDummyDataUtil();
-        LOG.info("@BeforeEach - executes once before each test method in AsteroidServiceIntegrationTest");
+        log.info("@BeforeEach - executes once before each test method in AsteroidServiceIntegrationTest");
     }
 
     /**
@@ -40,11 +42,11 @@ public class AsteroidServiceIntTest {
     @Test
     public void whenCallingFindAllAsteroids_integrated_thenShouldReturnCorrectList() throws Exception {
         //Asignamos el planeta de la petición
-        planet = "Earth";
+        planet = JavaTestConstants.STR_PLANET_EARTH;
 
         //Fechas límite de la petición
-        LocalDate dateStart = LocalDate.parse("2020-09-09");
-        LocalDate dateEnd = LocalDate.parse("2020-09-16");
+        LocalDate dateStart = LocalDate.parse(JavaTestConstants.TESTS_STR_START_DATE);
+        LocalDate dateEnd = LocalDate.parse(JavaTestConstants.TESTS_STR_END_DATE);
 
         //Datos esperados
         List<AsteroidDTO> filteredAsteroidsDTOExpected = new ArrayList<>();
