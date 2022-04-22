@@ -9,17 +9,20 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.support.HttpRequestWrapper;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Component
 public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterceptor {
 
     @Value("${api-key}")
-    private String API_KEY;
+    private String apiKey;
 
     /**
      * This interceptor will be invoked for every incoming request
@@ -33,12 +36,12 @@ public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterc
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
 
-        log.info("[REST TEMPLATE INTERCEPTOR] - REQUEST TO NASA: " + "[" + request.getMethod() + "]" + request.getURI());
+        log.info("[REST TEMPLATE INTERCEPTOR] - REQUEST TO NASA: [{}]{}", request.getMethod(), request.getURI());
         logRequest(request, body);
 
         //Modificamos la petición: añadir API key
         URI uri = UriComponentsBuilder.fromHttpRequest(request)
-                .queryParam(JavaTestConstants.API_PARAMETER_KEY, API_KEY)
+                .queryParam(JavaTestConstants.API_PARAMETER_KEY, apiKey)
                 .build().toUri();
 
         HttpRequest modifiedRequest = new HttpRequestWrapper(request) {
@@ -48,13 +51,9 @@ public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterc
             }
         };
 
-//        ClientHttpResponse response = execution.execute(request, body);
         ClientHttpResponse response = execution.execute(modifiedRequest, body);
 
-//        InputStreamReader isr = new InputStreamReader(response.getBody(), StandardCharsets.UTF_8);
-//        String strBody = new BufferedReader(isr).lines().collect(Collectors.joining("\n"));
-
-        log.info("[REST TEMPLATE INTERCEPTOR] - RESPONSE FROM NASA: " + "[Https status: " + response.getStatusCode() + "]");
+        log.info("[REST TEMPLATE INTERCEPTOR] - RESPONSE FROM NASA: [Https status:{}]", response.getStatusCode());
         logResponse(response);
 
         return response;
@@ -66,7 +65,7 @@ public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterc
             log.debug("URI         : {}", request.getURI());
             log.debug("Method      : {}", request.getMethod());
             log.debug("Headers     : {}", request.getHeaders());
-            log.debug("Request body: {}", new String(body, "UTF-8"));
+            log.debug("Request body: {}", new String(body, StandardCharsets.UTF_8));
             log.debug("==========================REQUEST INFO END================================================");
         }
     }
@@ -77,7 +76,7 @@ public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterc
             log.debug("Status code  : {}", response.getStatusCode());
             log.debug("Status text  : {}", response.getStatusText());
             log.debug("Headers      : {}", response.getHeaders());
-//            log.debug("Response body: {}", StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));//TO-DO: Mientras refactoring y tratamiento de logs
+            log.debug("Response body: {}", StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
             log.debug("=======================RESPONSE INFO END=================================================");
         }
     }

@@ -4,8 +4,9 @@
 
     <!--File variables-->
     <property name="LOGS" value="./logs" />
-    <!--<property name="LOG_PATTERN" value="%boldWhite(%d{ISO8601}) %cyan([%thread]) %highlight(%-5level) %highlight(%logger{5}) %green(%caller{3})- %magenta(%msg%n)"/>-->
-    <property name="LOG_PATTERN" value="%boldWhite(%d{ISO8601}) %cyan([%thread]) %highlight(%-5level) %highlight(%logger{5}) %boldRed(%rEx{1}) - %magenta(%msg%n)"/>
+    <!--Parameter %green(%caller{3}) to see calls levels-->
+    <!--Parameter %yellow(%C{1.}) for package and class-->
+    <property name="LOG_PATTERN" value="%boldWhite(%d{ISO8601}) %cyan([%thread]) %highlight(%-5level) %highlight(%logger) - %magenta(%msg%n)"/>
     <property name="LOG_ENCODER_PATTERN" value="%d %p %C{1.} [%t] %m%n"/>
     <property name="LOG_FILE_ID" value="%d{yyyy-MM-dd}.%i.log"/>
 
@@ -23,7 +24,7 @@
 
     <appender name="RollingFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS}/spring-boot-logger.log</file>
+        <file>${LOGS}/java-test-logger.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>${LOG_ENCODER_PATTERN}</Pattern>
@@ -32,7 +33,7 @@
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily and when the file reaches 10 MegaBytes -->
-            <fileNamePattern>${LOGS}/archived/spring-boot-logger-${LOG_FILE_ID}
+            <fileNamePattern>${LOGS}/archived/java-test-logger-${LOG_FILE_ID}
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -44,7 +45,7 @@
 
     <appender name="SevereRollingFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS}/severe-logger.log</file>
+        <file>${LOGS}/severe-java-test-logger.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
@@ -56,7 +57,7 @@
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily and when the file reaches 10 MegaBytes -->
-            <fileNamePattern>${LOGS}/archived/severe-logger-${LOG_FILE_ID}
+            <fileNamePattern>${LOGS}/archived/severe-java-test-logger-${LOG_FILE_ID}
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -67,7 +68,7 @@
 
     <!-- LOG everything at INFO level with Appender Console-->
     <!--This tag sets the root logger to DEBUG mode, and associates its output with the Appender named Console-->
-    <root level="info">
+    <root level="warn">
         <appender-ref ref="Console" />
     </root>
 

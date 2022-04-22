@@ -24,9 +24,7 @@ public class RestClientConfig {
     private AsteroidsRestTemplateInterceptor asteroidsRestTemplateInterceptor;
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-
-//        RestTemplate restTemplate = new RestTemplate();
+    public RestTemplate restTemplate(RestTemplateBuilder builder, AsteroidsRestTemplateInterceptor asteroidsRestTemplateInterceptor) {
 
         RestTemplate restTemplate = null;
         if (log.isDebugEnabled()) {

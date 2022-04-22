@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @SpringBootTest
-public class AsteroidServiceIntTest {
+class AsteroidServiceIntTest {
 
     private String planet;
     private NasaDummyDataUtil nasaDummyDataUtil;
@@ -40,7 +40,7 @@ public class AsteroidServiceIntTest {
      * @throws Exception
      */
     @Test
-    public void whenCallingFindAllAsteroids_integrated_thenShouldReturnCorrectList() throws Exception {
+    void whenCallingFindAllAsteroids_integrated_thenShouldReturnCorrectList() throws Exception {
         //Asignamos el planeta de la petición
         planet = JavaTestConstants.STR_PLANET_EARTH;
 

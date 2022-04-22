@@ -57,7 +57,7 @@ public class AsteroidServiceTest {
      * @throws Exception
      */
     @Test
-    public void whenCallingApiCall_thenShouldReturnCorrectObject() throws Exception {
+    void whenCallingApiCall_thenShouldReturnCorrectObject() throws Exception {
 
         //Fechas límite de la petición
         LocalDate dateStart = LocalDate.parse(JavaTestConstants.TESTS_STR_START_DATE);
@@ -84,7 +84,7 @@ public class AsteroidServiceTest {
      * @throws Exception
      */
     @Test
-    public void whenCallingFindAllAsteroids_thenShouldReturnCorrectList() throws Exception {
+    void whenCallingFindAllAsteroids_thenShouldReturnCorrectList() throws Exception {
         //Asignamos el planeta de la petición
         planet = JavaTestConstants.STR_PLANET_EARTH;
 

@@ -2,6 +2,9 @@ package com.atmira.javatest.utils;
 
 public class JavaTestConstants {
 
+    private JavaTestConstants() {
+    }
+
     /*Variables de conexión*/
     public static final String API_PARAMETER_START_DATE = "start_date";
     public static final String API_PARAMETER_END_DATE = "end_date";

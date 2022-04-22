@@ -38,7 +38,6 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
      */
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        return super.handleMissingServletRequestParameter(ex, headers, status, request);
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }

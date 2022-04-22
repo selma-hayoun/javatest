@@ -16,6 +16,5 @@ public class JavaTestConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(asteroidsRequestInterceptor)
                 .addPathPatterns("/asteroids");
-//        WebMvcConfigurer.super.addInterceptors(registry);
     }
 }

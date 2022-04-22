@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AsteroidControllerIntTest {
+class AsteroidControllerIntTest {
 
     @LocalServerPort
     private int port;
@@ -23,7 +23,7 @@ public class AsteroidControllerIntTest {
      * Test de conexión a nuestra API: caso parámetro correcto
      */
     @Test
-    public void givenCorrectPlanet_integrated_thenShouldGetAsteroidsOk(){
+    void givenCorrectPlanet_integrated_thenShouldGetAsteroidsOk(){
         String planet = JavaTestConstants.STR_PLANET_EARTH;
 
         ResponseEntity<String> response = restTemplate.getForEntity(JavaTestConstants.URL_RESOURCE_START + port + JavaTestConstants.URL_RESOURCE_END + planet, String.class);
@@ -38,23 +38,23 @@ public class AsteroidControllerIntTest {
      * Test conexión a nuestra API: caso parámetro incorrecto o vacío
      */
     @Test
-    public void givenIncorrectPlanet_integrated_thenShouldGet404(){
+    void givenIncorrectPlanet_integrated_thenShouldGet404(){
         String planetA = JavaTestConstants.STR_PLANET_URANUS;
         String planetB = JavaTestConstants.STR_EMPTY;
 
         ResponseEntity<String> responseA = restTemplate.getForEntity(JavaTestConstants.URL_RESOURCE_START + port + JavaTestConstants.URL_RESOURCE_END + planetA, String.class);
         ResponseEntity<String> responseB = restTemplate.getForEntity(JavaTestConstants.URL_RESOURCE_START + port + JavaTestConstants.URL_RESOURCE_END + planetB, String.class);
 
-        Assertions.assertEquals(responseA.getStatusCode(), HttpStatus.NOT_FOUND);
-        Assertions.assertEquals(responseB.getStatusCode(), HttpStatus.NOT_FOUND);
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseA.getStatusCode());
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseB.getStatusCode());
     }
 
     /**
      * Test de conexión a nuestra API: no enviado parámetro Planet
      */
     @Test
-    public void givenNoPlanetParameter_integrated_thenShouldGet400(){
+    void givenNoPlanetParameter_integrated_thenShouldGet400(){
         ResponseEntity<String> response = restTemplate.getForEntity(JavaTestConstants.URL_RESOURCE_START + port + "/asteroids", String.class);
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.BAD_REQUEST);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 }

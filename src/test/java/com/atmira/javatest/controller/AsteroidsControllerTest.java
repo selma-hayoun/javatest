@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @Slf4j
-public class AsteroidsControllerTest {
+class AsteroidsControllerTest {
 
     private String planet;
     private AsteroidServiceI asteroidService;
@@ -60,7 +60,7 @@ public class AsteroidsControllerTest {
      * @throws Exception
      */
     @Test
-    public void givenCorrectPlanetParameter_whenCallingGetAsteroids_thenShouldReturnCorrectResponse() throws Exception {
+    void givenCorrectPlanetParameter_whenCallingGetAsteroids_thenShouldReturnCorrectResponse() throws Exception {
         //Asignamos el planeta de la petición
         planet = JavaTestConstants.STR_PLANET_EARTH;
 
@@ -76,7 +76,7 @@ public class AsteroidsControllerTest {
      * @throws Exception
      */
     @Test
-    public void givenNotSupportedPlanet_whenCallingGetAsteroids_thenExpectedNotSupportedPlanetException() throws Exception {
+    void givenNotSupportedPlanet_whenCallingGetAsteroids_thenExpectedNotSupportedPlanetException() throws Exception {
         planet = "Uranus";
 
         NotSupportedPlanetException thrown = Assertions.assertThrows(NotSupportedPlanetException.class, () -> {
@@ -94,7 +94,7 @@ public class AsteroidsControllerTest {
      * @throws Exception
      */
     @Test
-    public void givenEmptyPlanet_whenCallingGetAsteroids_thenExpectedNotSupportedPlanetException() throws Exception {
+    void givenEmptyPlanet_whenCallingGetAsteroids_thenExpectedNotSupportedPlanetException() throws Exception {
         planet = JavaTestConstants.STR_EMPTY;
 
         NotSupportedPlanetException thrown = Assertions.assertThrows(NotSupportedPlanetException.class, () -> {
@@ -111,7 +111,7 @@ public class AsteroidsControllerTest {
      * @throws Exception
      */
     @Test
-    public void givenPlanetWithNoHazardousAsteroids_whenCallingGetAsteroids_thenExpectedNotAsteroidsFoundException() throws Exception {
+    void givenPlanetWithNoHazardousAsteroids_whenCallingGetAsteroids_thenExpectedNotAsteroidsFoundException() throws Exception {
         planet = JavaTestConstants.STR_PLANET_EARTH;
         List<AsteroidDTO> emptyList = new ArrayList<>();
 

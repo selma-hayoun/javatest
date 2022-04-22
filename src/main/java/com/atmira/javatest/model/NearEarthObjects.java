@@ -20,7 +20,7 @@ import java.util.Map;
 public class NearEarthObjects implements Serializable {
 
     @JsonProperty("near_earth_objects")
-    private Map<String, List<Asteroid>> nearEarthObjects;
+    private Map<String, List<Asteroid>> nearEarthObjectsFound;
 
     /**
      * JsonAnyGetter
@@ -30,6 +30,6 @@ public class NearEarthObjects implements Serializable {
      */
     @JsonAnyGetter
     public Map<String, List<Asteroid>> getNearEarthObjects() {
-        return nearEarthObjects;
+        return this.nearEarthObjectsFound;
     }
 }
