@@ -6,6 +6,7 @@ import com.atmira.javatest.model.NearEarthObjects;
 import com.atmira.javatest.utils.JavaTestConstants;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,6 +26,10 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
     @Autowired
     @Setter
     private RestTemplate restTemplate;
+
+    @Value("${api-nasa-endpoint}")
+    @Setter
+    private String apiNasaEndpoint;
 
     @Override
     public List<AsteroidDTO> findAllAsteroids(String planet, LocalDate dateStart, LocalDate dateEnd) {
@@ -59,7 +64,7 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
 
     protected NearEarthObjects apiCall(LocalDate dateStart, LocalDate dateEnd){
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(JavaTestConstants.API_REQUEST_ENDPOINT)
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiNasaEndpoint)
                 .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
                 .queryParam(JavaTestConstants.API_PARAMETER_END_DATE, dateEnd);
 

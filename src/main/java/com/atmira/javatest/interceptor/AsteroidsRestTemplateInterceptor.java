@@ -19,7 +19,7 @@ import java.net.URI;
 public class AsteroidsRestTemplateInterceptor implements ClientHttpRequestInterceptor {
 
     @Value("${api-key}")
-    protected String API_KEY;
+    private String API_KEY;
 
     /**
      * This interceptor will be invoked for every incoming request

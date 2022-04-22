@@ -8,10 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -31,6 +32,7 @@ public class AsteroidServiceTest {
     private AsteroidServiceImpl asteroidService;
     private ResponseEntity<NearEarthObjects> nearEarthObjectsResponseEntity;
     private NasaDummyDataUtil nasaDummyDataUtil;
+    private String apiNasaEndpoint;
 
 
     @BeforeEach
@@ -38,8 +40,10 @@ public class AsteroidServiceTest {
         asteroidService = new AsteroidServiceImpl();
         nasaDummyDataUtil = new NasaDummyDataUtil();
         restTemplate = Mockito.mock(RestTemplate.class);
+        apiNasaEndpoint = JavaTestConstants.TESTS_API_REQUEST_ENDPOINT;
 
         asteroidService.setRestTemplate(restTemplate);
+        asteroidService.setApiNasaEndpoint(apiNasaEndpoint);
 
         //Preparamos objeto del tipo vacío con OK
         nearEarthObjectsResponseEntity = new ResponseEntity<NearEarthObjects>(HttpStatus.OK);
@@ -59,7 +63,7 @@ public class AsteroidServiceTest {
         LocalDate dateStart = LocalDate.parse(JavaTestConstants.TESTS_STR_START_DATE);
         LocalDate dateEnd = LocalDate.parse(JavaTestConstants.TESTS_STR_END_DATE);
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(JavaTestConstants.API_REQUEST_ENDPOINT)
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiNasaEndpoint)
                 .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
                 .queryParam(JavaTestConstants.API_PARAMETER_END_DATE, dateEnd);
 
@@ -88,7 +92,7 @@ public class AsteroidServiceTest {
         LocalDate dateStart = LocalDate.parse(JavaTestConstants.TESTS_STR_START_DATE);
         LocalDate dateEnd = LocalDate.parse(JavaTestConstants.TESTS_STR_END_DATE);
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(JavaTestConstants.API_REQUEST_ENDPOINT)
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiNasaEndpoint)
                 .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
                 .queryParam(JavaTestConstants.API_PARAMETER_END_DATE, dateEnd);
 

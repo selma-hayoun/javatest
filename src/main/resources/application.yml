@@ -5,3 +5,5 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
 # debug: true
 # trace: true
+api-nasa-endpoint: https://api.nasa.gov/neo/rest/v1/feed
+dev-url: 'http://localhost:'
