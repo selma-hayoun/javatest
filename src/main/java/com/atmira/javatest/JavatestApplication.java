@@ -16,13 +16,14 @@ public class JavatestApplication {
 		SpringApplication.run(JavatestApplication.class, args);
 	}
 
-	@Bean
+	@Bean("asyncExecutor")
 	public Executor taskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setThreadNamePrefix("AsyncThread-");
+		executor.setThreadGroupName("-AsyncCampions-");
 		executor.setCorePoolSize(2);
 		executor.setMaxPoolSize(2);
 		executor.setQueueCapacity(500);
-		executor.setThreadNamePrefix("Atmira test thread-");
 		executor.initialize();
 		return executor;
 	}

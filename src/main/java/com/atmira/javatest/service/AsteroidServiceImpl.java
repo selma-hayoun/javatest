@@ -43,7 +43,11 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         //Del objeto NearEarthObjects extraemos los valores del mapa de objetos - Listas de asteroides
         //Y los vamos añadiendo a nuestra lista
         try {
-            apiCall(dateStart, dateEnd).get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
+
+            CompletableFuture<NearEarthObjects> nearEarthObjectsCompletableFuture =  apiCall(dateStart, dateEnd);
+
+            nearEarthObjectsCompletableFuture.get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
+
         } catch(InterruptedException | ExecutionException ex) {
             throw new AsyncThreadException();
         }
@@ -71,8 +75,8 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         return filteredAsteroidsDTO.stream().limit(3).collect(Collectors.toList());
     }
 
-    @Async
-    protected CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd){
+    @Async("asyncExecutor")
+    protected CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws InterruptedException {
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiNasaEndpoint)
                 .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
@@ -81,6 +85,8 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         String uriBuilder = builder.build().encode().toUriString();
 
         ResponseEntity<NearEarthObjects> responseEntity = restTemplate.getForEntity(uriBuilder, NearEarthObjects.class);
+
+        Thread.sleep(1000L);
 
         return CompletableFuture.completedFuture(responseEntity.getBody());
     }
