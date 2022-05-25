@@ -1,6 +1,7 @@
 package com.atmira.javatest.service;
 
 import com.atmira.javatest.dto.AsteroidDTO;
+import com.atmira.javatest.exception.AsyncThreadException;
 import com.atmira.javatest.model.Asteroid;
 import com.atmira.javatest.model.NearEarthObjects;
 import com.atmira.javatest.utils.JavaTestConstants;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,6 +19,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 
@@ -38,7 +42,12 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
 
         //Del objeto NearEarthObjects extraemos los valores del mapa de objetos - Listas de asteroides
         //Y los vamos añadiendo a nuestra lista
-        apiCall(dateStart, dateEnd).getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
+        try {
+            apiCall(dateStart, dateEnd).get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
+        } catch(InterruptedException | ExecutionException ex) {
+            throw new AsyncThreadException();
+        }
+
 
         //Evaluamos: potencial riesgo de impacto, planeta que orbitan es el suministrado
         //Mapeamos a AsteroidDTO (calculo de diámetro medio y formateo de fecha)
@@ -62,7 +71,8 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         return filteredAsteroidsDTO.stream().limit(3).collect(Collectors.toList());
     }
 
-    protected NearEarthObjects apiCall(LocalDate dateStart, LocalDate dateEnd){
+    @Async
+    protected CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd){
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiNasaEndpoint)
                 .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
@@ -72,7 +82,7 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
 
         ResponseEntity<NearEarthObjects> responseEntity = restTemplate.getForEntity(uriBuilder, NearEarthObjects.class);
 
-        return responseEntity.getBody();
+        return CompletableFuture.completedFuture(responseEntity.getBody());
     }
 
 }

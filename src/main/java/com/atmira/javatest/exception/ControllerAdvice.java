@@ -81,4 +81,17 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }
 
+    /**
+     * Excepción cuando el hilo de petición a la Nasa es interruppido o abortado.
+     * Por ejemplo, time out de la Api de la Nasa
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(AsyncThreadException.class)
+    public ResponseEntity<ApiError> handleAsyncThreadException(AsyncThreadException ex) {
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiError);
+    }
+
 }
