@@ -5,7 +5,9 @@ import com.atmira.javatest.exception.AsyncThreadException;
 import com.atmira.javatest.model.Asteroid;
 import com.atmira.javatest.model.NearEarthObjects;
 import com.atmira.javatest.utils.JavaTestConstants;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -24,33 +26,46 @@ import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 
+@Slf4j
+@NoArgsConstructor
 @Service
 public class AsteroidServiceImpl implements AsteroidServiceI {
 
-    @Autowired
-    @Setter
-    private RestTemplate restTemplate;
+//    @Autowired
+//    @Setter
+//    private RestTemplate restTemplate;
+//
+//    @Value("${api-nasa-endpoint}")
+//    @Setter
+//    private String apiNasaEndpoint;
 
-    @Value("${api-nasa-endpoint}")
-    @Setter
-    private String apiNasaEndpoint;
+    @Autowired
+    private NasaAsyncCall nasaAsyncCall;
+
+//    public AsteroidServiceImpl(NasaAsyncCall nasaAsyncCall) {
+//        this.nasaAsyncCall = nasaAsyncCall;
+//    }
 
     @Override
     public List<AsteroidDTO> findAllAsteroids(String planet, LocalDate dateStart, LocalDate dateEnd) {
 
         List<Asteroid> filteredAsteroids = new ArrayList<>();
 
+        log.info("Inicio método findAllAsteroids " + Thread.currentThread().getName());
+
         //Del objeto NearEarthObjects extraemos los valores del mapa de objetos - Listas de asteroides
         //Y los vamos añadiendo a nuestra lista
         try {
 
-            CompletableFuture<NearEarthObjects> nearEarthObjectsCompletableFuture =  apiCall(dateStart, dateEnd);
+            CompletableFuture<NearEarthObjects> nearEarthObjectsCompletableFuture =  nasaAsyncCall.apiCall(dateStart, dateEnd);
 
             nearEarthObjectsCompletableFuture.get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
 
         } catch(InterruptedException | ExecutionException ex) {
             throw new AsyncThreadException();
         }
+
+        log.info("Ejecutando método findAllAsteroids " + Thread.currentThread().getName());
 
 
         //Evaluamos: potencial riesgo de impacto, planeta que orbitan es el suministrado
@@ -75,20 +90,25 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         return filteredAsteroidsDTO.stream().limit(3).collect(Collectors.toList());
     }
 
-    @Async("asyncExecutor")
-    protected CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws InterruptedException {
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiNasaEndpoint)
-                .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
-                .queryParam(JavaTestConstants.API_PARAMETER_END_DATE, dateEnd);
-
-        String uriBuilder = builder.build().encode().toUriString();
-
-        ResponseEntity<NearEarthObjects> responseEntity = restTemplate.getForEntity(uriBuilder, NearEarthObjects.class);
-
-        Thread.sleep(1000L);
-
-        return CompletableFuture.completedFuture(responseEntity.getBody());
-    }
+////    @Async("asyncExecutor")
+//    @Async("ASYNCEXECUTOR")
+//    public CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws InterruptedException {
+////    protected CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws InterruptedException {//Tiene que ser public
+//
+//        log.info("Ejecutando método apiCall " + Thread.currentThread().getName());
+//
+//        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiNasaEndpoint)
+//                .queryParam(JavaTestConstants.API_PARAMETER_START_DATE, dateStart)
+//                .queryParam(JavaTestConstants.API_PARAMETER_END_DATE, dateEnd);
+//
+//        String uriBuilder = builder.build().encode().toUriString();
+//
+//        ResponseEntity<NearEarthObjects> responseEntity = restTemplate.getForEntity(uriBuilder, NearEarthObjects.class);
+//
+//        //Delay para pruebas
+//        Thread.sleep(5000L);
+//
+//        return CompletableFuture.completedFuture(responseEntity.getBody());
+//    }
 
 }
