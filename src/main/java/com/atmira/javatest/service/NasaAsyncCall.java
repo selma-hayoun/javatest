@@ -1,5 +1,6 @@
 package com.atmira.javatest.service;
 
+import com.atmira.javatest.exception.NotSupportedPlanetException;
 import com.atmira.javatest.model.NearEarthObjects;
 import com.atmira.javatest.utils.JavaTestConstants;
 import lombok.Setter;
@@ -33,7 +34,8 @@ public class NasaAsyncCall {
 //    }
 
     //    @Async("asyncExecutor")
-    @Async("ASYNCEXECUTOR")
+//    @Async("ASYNCEXECUTOR")
+    @Async
     public CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws InterruptedException {
 //    protected CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws InterruptedException {//Tiene que ser public
 
@@ -47,9 +49,11 @@ public class NasaAsyncCall {
 
         ResponseEntity<NearEarthObjects> responseEntity = restTemplate.getForEntity(uriBuilder, NearEarthObjects.class);
 
+        throw new NotSupportedPlanetException("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
         //Delay para pruebas
 //        Thread.sleep(5000L);
 
-        return CompletableFuture.completedFuture(responseEntity.getBody());
+//        return CompletableFuture.completedFuture(responseEntity.getBody());
     }
 }

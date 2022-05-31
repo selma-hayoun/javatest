@@ -62,7 +62,8 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
             nearEarthObjectsCompletableFuture.get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
 
         } catch(InterruptedException | ExecutionException ex) {
-            throw new AsyncThreadException();
+//            throw new AsyncThreadException();
+            log.error("Async thread interrupted or aborted.");
         }
 
         log.info("Ejecutando método findAllAsteroids " + Thread.currentThread().getName());
