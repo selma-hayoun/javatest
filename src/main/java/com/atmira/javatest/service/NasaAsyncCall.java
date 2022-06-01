@@ -49,11 +49,11 @@ public class NasaAsyncCall {
 
         ResponseEntity<NearEarthObjects> responseEntity = restTemplate.getForEntity(uriBuilder, NearEarthObjects.class);
 
-        throw new NotSupportedPlanetException("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+//        throw new NotSupportedPlanetException("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
         //Delay para pruebas
 //        Thread.sleep(5000L);
 
-//        return CompletableFuture.completedFuture(responseEntity.getBody());
+        return CompletableFuture.completedFuture(responseEntity.getBody());
     }
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
@@ -59,11 +60,16 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
 
             CompletableFuture<NearEarthObjects> nearEarthObjectsCompletableFuture =  nasaAsyncCall.apiCall(dateStart, dateEnd);
 
-            nearEarthObjectsCompletableFuture.get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
+//            try {
+                nearEarthObjectsCompletableFuture.get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
+//            }catch (CompletionException ex) {
+//                throw ex.getCause();
+//            }
 
-        } catch(InterruptedException | ExecutionException ex) {
+        } catch(Throwable ex) {
+//        } catch(InterruptedException | ExecutionException ex) {
 //            throw new AsyncThreadException();
-            log.error("Async thread interrupted or aborted.");
+            log.error("Async thread error.");
         }
 
         log.info("Ejecutando método findAllAsteroids " + Thread.currentThread().getName());
