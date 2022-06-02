@@ -36,7 +36,8 @@ public class NasaAsyncCall {
     //    @Async("asyncExecutor")
 //    @Async("ASYNCEXECUTOR")
     @Async
-    public CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws InterruptedException {
+//    public CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws Exception {
+      public void apiCall(LocalDate dateStart, LocalDate dateEnd) throws Exception {
 //    protected CompletableFuture<NearEarthObjects> apiCall(LocalDate dateStart, LocalDate dateEnd) throws InterruptedException {//Tiene que ser public
 
         log.info("Ejecutando método apiCall " + Thread.currentThread().getName());
@@ -49,11 +50,11 @@ public class NasaAsyncCall {
 
         ResponseEntity<NearEarthObjects> responseEntity = restTemplate.getForEntity(uriBuilder, NearEarthObjects.class);
 
-//        throw new NotSupportedPlanetException("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        throw new Exception("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + Thread.currentThread().getName());
 
         //Delay para pruebas
 //        Thread.sleep(5000L);
 
-        return CompletableFuture.completedFuture(responseEntity.getBody());
+//        return CompletableFuture.completedFuture(responseEntity.getBody());
     }
 }

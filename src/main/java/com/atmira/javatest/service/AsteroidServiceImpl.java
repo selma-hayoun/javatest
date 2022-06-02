@@ -57,23 +57,30 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         //Del objeto NearEarthObjects extraemos los valores del mapa de objetos - Listas de asteroides
         //Y los vamos añadiendo a nuestra lista
         try {
-
-            CompletableFuture<NearEarthObjects> nearEarthObjectsCompletableFuture =  nasaAsyncCall.apiCall(dateStart, dateEnd);
-
-//            try {
-                nearEarthObjectsCompletableFuture.get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
-//            }catch (CompletionException ex) {
-//                throw ex.getCause();
-//            }
-
-        } catch(Throwable ex) {
-//        } catch(InterruptedException | ExecutionException ex) {
-//            throw new AsyncThreadException();
+//
+//            CompletableFuture<NearEarthObjects> nearEarthObjectsCompletableFuture =  nasaAsyncCall.apiCall(dateStart, dateEnd);
+        nasaAsyncCall.apiCall(dateStart, dateEnd);
+//
+//            nearEarthObjectsCompletableFuture.whenComplete((result, ex) -> {
+//               if(ex != null) {
+//                   log.error("Async thread error: " + ex.getMessage());
+//               } else {
+//                   result.getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
+//               }
+//            });
+////            try {
+////                nearEarthObjectsCompletableFuture.get().getNearEarthObjects().values().forEach(filteredAsteroids::addAll);
+////            }catch (CompletionException ex) {
+////                throw ex.getCause();
+////            }
+//
+        } catch(Exception ex) {
+////        } catch(InterruptedException | ExecutionException ex) {
+////            throw new AsyncThreadException();
             log.error("Async thread error.");
         }
 
         log.info("Ejecutando método findAllAsteroids " + Thread.currentThread().getName());
-
 
         //Evaluamos: potencial riesgo de impacto, planeta que orbitan es el suministrado
         //Mapeamos a AsteroidDTO (calculo de diámetro medio y formateo de fecha)
@@ -94,7 +101,8 @@ public class AsteroidServiceImpl implements AsteroidServiceI {
         filteredAsteroidsDTO.sort(Comparator.comparing(AsteroidDTO::getDiameter, Comparator.nullsLast(Comparator.naturalOrder())).reversed());//Comparator null-safe
 
         //Enviamos los 3 más grandes de diametro
-        return filteredAsteroidsDTO.stream().limit(3).collect(Collectors.toList());
+//        return filteredAsteroidsDTO.stream().limit(3).collect(Collectors.toList());
+        return new ArrayList<>();
     }
 
 ////    @Async("asyncExecutor")

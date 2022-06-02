@@ -1,12 +1,24 @@
-2022-06-01 10:23:08,046 ERROR com.atmira.javatest.exception.NotSupportedPlanetException [AsyncThread-1] No Data Collected for planet: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-2022-06-01 10:23:08,051 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-1] Async thread interrupted or aborted.
-2022-06-01 10:23:08,057 ERROR com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
-2022-06-01 10:23:08,067 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
-2022-06-01 10:30:40,474 ERROR com.atmira.javatest.exception.NotSupportedPlanetException [AsyncThread-1] No Data Collected for planet: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-2022-06-01 10:30:40,475 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-1] Async thread error.
-2022-06-01 10:30:40,482 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
-2022-06-01 10:30:40,525 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
-2022-06-01 10:32:03,874 ERROR com.atmira.javatest.exception.NotSupportedPlanetException [AsyncThread-1] No Data Collected for planet: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-2022-06-01 10:32:03,876 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-1] Async thread error.
-2022-06-01 10:32:03,879 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
-2022-06-01 10:32:03,921 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
+2022-06-02 11:43:36,208 ERROR com.atmira.javatest.exception.NotSupportedPlanetException [AsyncThread-1] No Data Collected for planet: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2022-06-02 11:43:36,212 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-1] Async thread error.
+2022-06-02 11:43:36,217 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
+2022-06-02 11:43:36,258 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
+2022-06-02 11:50:09,297 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-1] Async thread error.
+2022-06-02 11:50:09,307 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
+2022-06-02 11:50:09,354 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
+2022-06-02 12:05:02,872 ERROR com.atmira.javatest.service.AsteroidServiceImpl [http-nio-8080-exec-1] Async thread error.
+2022-06-02 12:05:02,877 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
+2022-06-02 12:05:02,914 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
+2022-06-02 12:20:51,226 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
+2022-06-02 12:20:51,313 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
+2022-06-02 12:20:54,915 ERROR com.atmira.javatest.service.AsteroidServiceImpl [AsyncThread-1] java.lang.Exception: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AsyncThread-1
+2022-06-02 12:22:13,272 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
+2022-06-02 12:22:13,386 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
+2022-06-02 12:22:15,403 ERROR com.atmira.javatest.service.AsteroidServiceImpl [AsyncThread-1] Async thread error: java.lang.Exception: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AsyncThread-1
+2022-06-02 12:27:08,429 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-1] No asteroids found that match the requirements
+2022-06-02 12:27:08,508 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
+2022-06-02 12:32:26,694 WARN com.atmira.javatest.exception.NotAsteroidsFoundException [http-nio-8080-exec-2] No asteroids found that match the requirements
+2022-06-02 12:32:26,800 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-2] Resolved [com.atmira.javatest.exception.NotAsteroidsFoundException: No asteroids found that match the requirements]
+2022-06-02 12:32:31,704 ERROR com.atmira.javatest.exception.CustomAsyncExceptionHandler [AsyncThread-1] Exception while executing with message AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AsyncThread-1 
+2022-06-02 12:32:31,705 ERROR com.atmira.javatest.exception.CustomAsyncExceptionHandler [AsyncThread-1] Exception happen in apiCall method 
+2022-06-02 12:32:31,705 ERROR com.atmira.javatest.exception.CustomAsyncExceptionHandler [AsyncThread-1] Parameter value 2022-06-02 
+2022-06-02 12:32:31,706 ERROR com.atmira.javatest.exception.CustomAsyncExceptionHandler [AsyncThread-1] Parameter value 2022-06-09 
